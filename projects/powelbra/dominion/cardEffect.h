@@ -19,4 +19,8 @@ int playAmbassador(int choice1, int choice2, struct gameState *state, int handPo
 /* Needs bonus incase any treasure is paid as tribute. */
 void playTribute(struct gameState *state, int handPos, int* bonus);
 
+/* choice1 is the POSITION of the card to trash.
+choice2 is the ENUM of the card to gain.	*/
+int playMine(int choice1, int choice2, struct gameState *state, int handPos);
+
 #endif

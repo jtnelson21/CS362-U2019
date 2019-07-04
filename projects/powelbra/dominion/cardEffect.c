@@ -156,9 +156,10 @@ int playAmbassador(int choice1, int choice2, struct gameState *state, int handPo
 // Note: All cards grabbed by tribute are moved in playedCards by the end of the function,
 // which is why they seem to be disappearing.
 void playTribute(struct gameState *state, int handPos, int* bonus) {
-	currentPlayer = whoseTurn(state);
-	nextPlayer = currentPlayer + 1;
+	int currentPlayer = whoseTurn(state);
+	int nextPlayer = currentPlayer + 1;
 	int tributeRevealedCards[2] = { -1, -1 };
+	int i;
 
 	// Check if there is a single or no cards in the next player's deck and discard combined.
 	if ((state->discardCount[nextPlayer] + state->deckCount[nextPlayer]) <= 1) {
@@ -194,7 +195,7 @@ void playTribute(struct gameState *state, int handPos, int* bonus) {
 			shuffle(nextPlayer, state);//Shuffle the deck
 		}
 		// Add the top two cards of the deck to tribute, decrementing deckCount each time.
-		for (i = 0; i <= 2, i++) {
+		for (i = 0; i <= 2; i++) {
 			tributeRevealedCards[i] = state->deck[nextPlayer][state->deckCount[nextPlayer] - 1];
 			state->deck[nextPlayer][state->deckCount[nextPlayer]-1] = -1;
 			state->deckCount[nextPlayer]--;
@@ -231,5 +232,43 @@ void playTribute(struct gameState *state, int handPos, int* bonus) {
 		}
 	}
 
+	discardCard(handPos, currentPlayer, state, 0);
+}
 
+int playMine(int choice1, int choice2, struct gameState *state, int handPos) {
+	int currentPlayer = whoseTurn(state);
+	int i, j;
+
+	j = state->hand[currentPlayer][choice1];  //store card we will trash
+
+	// Verify card to trash is treasure
+	if (j < copper || j > gold) {
+		return -1;
+	}
+
+	// Verify card to gain is treasure
+	if (choice2 < copper || choice2 > gold) {
+		return -1;
+	}
+
+	// Verify choice2 is within upgrade range
+	if ((getCost(j) + 3) > getCost(choice2)) {
+		return -1;
+	}
+
+	//discard card from hand
+	discardCard(handPos, currentPlayer, state, 0);
+
+	// Trash selected card; Need to loop through hand to find it since, after discarding mine,
+	// choice1 no longer points to the correct card.
+	for (i = 0; i < state->handCount[currentPlayer]; i++) {
+		if (state->hand[currentPlayer][i] == j) {
+			discardCard(i, currentPlayer, state, 1);
+			break;
+		}
+	}
+
+	// Gain card to hand
+	gainCard(choice2, state, 2, currentPlayer);
+	return 0;
 }
