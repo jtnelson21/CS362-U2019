@@ -10,19 +10,19 @@ dominion.o: dominion.h dominion.c rngs.o cardEffect.o
 	gcc -c dominion.c -g  $(CFLAGS)
 
 playdom: dominion.o playdom.c
-	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
+	gcc -o playdom playdom.c -g dominion.o rngs.o cardEffect.o $(CFLAGS)
 #To run playdom you need to entere: ./playdom <any integer number> like ./playdom 10*/
 testDrawCard: testDrawCard.c dominion.o rngs.o
-	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
+	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o cardEffect.o $(CFLAGS)
 
 badTestDrawCard: badTestDrawCard.c dominion.o rngs.o
-	gcc -o badTestDrawCard -g  badTestDrawCard.c dominion.o rngs.o $(CFLAGS)
+	gcc -o badTestDrawCard -g  badTestDrawCard.c dominion.o rngs.o cardEffect.o $(CFLAGS)
 
 testBuyCard: testDrawCard.c dominion.o rngs.o
-	gcc -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
+	gcc -o testDrawCard -g  testDrawCard.c dominion.o rngs.o cardEffect.o $(CFLAGS)
 
 testAll: dominion.o testSuite.c
-	gcc -o testSuite testSuite.c -g  dominion.o rngs.o $(CFLAGS)
+	gcc -o testSuite testSuite.c -g  dominion.o rngs.o cardEffect.o $(CFLAGS)
 
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
@@ -34,7 +34,7 @@ runtests: testDrawCard
 
 
 player: player.c interface.o
-	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
+	gcc -o player player.c -g  dominion.o rngs.o interface.o cardEffect.o $(CFLAGS)
 
 all: playdom player 
 
