@@ -4,7 +4,7 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-int baron(int choice, struct gameState *state, int handPos) {
+void playBaron(int choice, struct gameState *state, int handPos) {
 	int currentPlayer = whoseTurn(state);
 
 	state->numBuys++;//Increase buys by 1!
@@ -44,8 +44,6 @@ int baron(int choice, struct gameState *state, int handPos) {
 
 	// Discard card, using 0 to put it in the played pile
 	discardCard(handPos, currentPlayer, state, 0);
-
-	return 0;
 
 }
 
