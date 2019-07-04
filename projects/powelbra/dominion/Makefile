@@ -33,7 +33,7 @@ runtests: testDrawCard
 	cat dominion.c.gcov >> unittestresult.out
 
 
-player: player.c interface.o
+player: player.c interface.o dominion.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o cardEffect.o $(CFLAGS)
 
 all: playdom player 

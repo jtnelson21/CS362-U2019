@@ -8,7 +8,7 @@ or gain an estate (0). Also needs the game state and the card's position in hand
 void playBaron(int choice, struct gameState *state, int handPos);
 
 /* choice 1 is > 0 to gain coins while choice 2 is > 0 for redraw.*/
-void playMinion(int choice1, int choice2, struct gameState *state, int handPos);
+void playMinion(int choice1, int choice2, struct gameState *state, int handPos, int *bonus);
 
 /* choice1 is the position in hand of which card is being revealed - cannot be the
 same as the Ambassador being played.

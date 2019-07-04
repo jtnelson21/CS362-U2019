@@ -48,19 +48,19 @@ void playBaron(int choice, struct gameState *state, int handPos) {
 
 }
 
-void playMinion(int choice1, int choice2, struct gameState *state, int handPos) {
+void playMinion(int choice1, int choice2, struct gameState *state, int handPos, int *bonus) {
 	int currentPlayer = whoseTurn(state);
 	int i, j;	// Variables for loops
 	//+1 action
 	state->numActions++;
 
-	if (choice1) {		//+2 coins
-		state->coins = state->coins + 2;
+	if (choice1 > 0) {		//+2 coins
+		bonus += 2;
 		//discard card from hand
 		discardCard(handPos, currentPlayer, state, 0);
 	}
 
-	else if (choice2) {		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
+	else if (choice2 > 0) {		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
 		//discard hand ********* May need to be changed to a manual discard since this function puts cards into the played area ***********
 		while (numHandCards(state) > 0) {
 			discardCard(handPos, currentPlayer, state, 0);
