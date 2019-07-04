@@ -16,5 +16,7 @@ choice2 is how many of the revealed card are being returned. Must be 0, 1, or 2.
 Returns -1 on error, else 0		*/
 int playAmbassador(int choice1, int choice2, struct gameState *state, int handPos);
 
+/* Needs bonus incase any treasure is paid as tribute. */
+void playTribute(struct gameState *state, int handPos, int* bonus);
 
 #endif
