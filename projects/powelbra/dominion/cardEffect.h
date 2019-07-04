@@ -5,7 +5,7 @@
 
 /* Function to handle the Baron card. 'choice' is the decision to discard an estate (1)
 or gain an estate (0). Also needs the game state and the card's position in hand. */
-void playBaron(int choice, struct gameState *state, int handPos);
+void playBaron(int choice, struct gameState *state, int handPos, int* bonus);
 
 /* choice 1 is > 0 to gain coins while choice 2 is > 0 for redraw.*/
 void playMinion(int choice1, int choice2, struct gameState *state, int handPos, int *bonus);

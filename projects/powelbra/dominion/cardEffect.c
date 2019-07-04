@@ -5,7 +5,7 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-void playBaron(int choice, struct gameState *state, int handPos) {
+void playBaron(int choice, struct gameState *state, int handPos, int* bonus) {
 	int currentPlayer = whoseTurn(state);
 
 	state->numBuys++;//Increase buys by 1!
@@ -14,7 +14,7 @@ void playBaron(int choice, struct gameState *state, int handPos) {
 		int card_not_discarded = 1;//Flag for discard set!
 		while (card_not_discarded) {
 			if (state->hand[currentPlayer][p] == estate) {//Found an estate card!
-				state->coins += 4;//Add 4 coins to the amount of coins
+				bonus += 4;//Add 4 coins to the amount of coins
 				state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];	// Add to the discard pile
 				state->discardCount[currentPlayer]++;
 				for (; p < state->handCount[currentPlayer]; p++) {	// Starts from current position in hand and continues
