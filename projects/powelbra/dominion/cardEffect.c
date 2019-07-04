@@ -50,6 +50,7 @@ void playBaron(int choice, struct gameState *state, int handPos) {
 
 void playMinion(int choice1, int choice2, struct gameState *state, int handPos) {
 	int currentPlayer = whoseTurn(state);
+	int i, j;	// Variables for loops
 	//+1 action
 	state->numActions++;
 
