@@ -89,3 +89,66 @@ void playMinion(int choice1, int choice2, struct gameState *state, int handPos) 
 		}
 	}
 }
+
+int playAmbassador(int choice1, int choice2, struct gameSate *state, int handPos) {
+	int currentPlayer = whoseTurn(state);
+	int i, j;	// Variables for loops
+	// Store enum of chosen card for use - most important later once cards are being discarded,
+	// as hand[currentPlayer][choice1] will not stay the same card.
+	int chosenCard = state->hand[currentPlayer][choice1]
+
+	// Choice1 is which card is being revealed. It cannot be the same card as this Ambassador.
+	// (It could be another one, but that would have a different handPos).
+	if (choice1 == handPos) {
+		return -1;
+	}
+
+	// Choice2 is how many cards the player wants to return. "Up to 2 cards" means it could be
+	// 0, 1, or 2 cards that are being returned.
+	if (choice2 > 2 || choice2 < 0) {
+		return -1;
+	}
+	
+	/* Compare each card in hand (except the played Ambassador) to the revealed card (choice1).
+	If they match, increment j. Then use j to ensure the player can actually discard the number of cards
+	they want to (e.g. the player wants to return 2 estates, but they only have 1 in hand)	*/
+	j = 0;
+	for (i = 0; i < state->handCount[currentPlayer]; i++) {
+		if (i != handPos && state->hand[currentPlayer][i] == chosenCard) {
+			j++;
+		}
+	}
+	if (j < choice2) {
+		return -1;
+	}
+
+
+	if (DEBUG)
+		printf("Player %d reveals card number: %d\n", currentPlayer, chosenCard);
+
+	//increase supply count for choosen card by amount being discarded
+	state->supplyCount[chosenCard] += choice2;
+
+	//each other player gains a copy of revealed card
+	for (i = 0; i < state->numPlayers; i++) {
+		if (i != currentPlayer) {
+			gainCard(chosenCard, state, 0, i);
+		}
+	}
+
+	//discard played card from hand
+	discardCard(handPos, currentPlayer, state, 0);
+
+	//trash copies of cards returned to supply - as of now the cards
+	// were duplicated. Trashing prevents creating copies.
+	for (j = 0; j < choice2; j++) {
+		for (i = 0; i < state->handCount[currentPlayer]; i++) {
+			if (state->hand[currentPlayer][i] == chosenCard) {
+				discardCard(i, currentPlayer, state, 1);
+				break;
+			}
+		}
+	}
+
+	return 0;
+}
