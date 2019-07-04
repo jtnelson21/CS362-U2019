@@ -90,12 +90,12 @@ void playMinion(int choice1, int choice2, struct gameState *state, int handPos) 
 	}
 }
 
-int playAmbassador(int choice1, int choice2, struct gameSate *state, int handPos) {
+int playAmbassador(int choice1, int choice2, struct gameState *state, int handPos) {
 	int currentPlayer = whoseTurn(state);
 	int i, j;	// Variables for loops
 	// Store enum of chosen card for use - most important later once cards are being discarded,
 	// as hand[currentPlayer][choice1] will not stay the same card.
-	int chosenCard = state->hand[currentPlayer][choice1]
+	int chosenCard = state->hand[currentPlayer][choice1];
 
 	// Choice1 is which card is being revealed. It cannot be the same card as this Ambassador.
 	// (It could be another one, but that would have a different handPos).
