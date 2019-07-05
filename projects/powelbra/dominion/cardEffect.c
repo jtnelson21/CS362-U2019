@@ -17,7 +17,7 @@ void playBaron(int choice, struct gameState *state, int handPos, int* bonus) {
 				bonus += 4;//Add 4 coins to the amount of coins
 				state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];	// Add to the discard pile
 				state->discardCount[currentPlayer]++;
-				for (; p < state->handCount[currentPlayer]; p++) {	// Starts from current position in hand and continues
+				for (p = 0; p < state->handCount[currentPlayer]; p++) {	// Starts from current position in hand and continues
 					state->hand[currentPlayer][p] = state->hand[currentPlayer][p + 1];
 				}
 				state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
@@ -63,7 +63,7 @@ void playMinion(int choice1, int choice2, struct gameState *state, int handPos, 
 	else if (choice2 > 0) {		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
 		//discard hand ********* May need to be changed to a manual discard since this function puts cards into the played area ***********
 		while (numHandCards(state) > 0) {
-			discardCard(handPos, currentPlayer, state, 0);
+			discardCard(state->handCount[currentPlayer], currentPlayer, state, 0);
 		}
 
 		//draw 4
@@ -77,7 +77,7 @@ void playMinion(int choice1, int choice2, struct gameState *state, int handPos, 
 				if (state->handCount[i] > 4) {
 					//discard hand
 					while (state->handCount[i] > 0) {
-						discardCard(handPos, i, state, 0);
+						discardCard(state->handCount[i]-1, i, state, 1);
 					}
 
 					//draw 4
@@ -114,7 +114,7 @@ int playAmbassador(int choice1, int choice2, struct gameState *state, int handPo
 	they want to (e.g. the player wants to return 2 estates, but they only have 1 in hand)	*/
 	j = 0;
 	for (i = 0; i < state->handCount[currentPlayer]; i++) {
-		if (i != handPos && state->hand[currentPlayer][i] == chosenCard) {
+		if (state->hand[currentPlayer][i] == chosenCard) {
 			j++;
 		}
 	}
@@ -145,7 +145,6 @@ int playAmbassador(int choice1, int choice2, struct gameState *state, int handPo
 		for (i = 0; i < state->handCount[currentPlayer]; i++) {
 			if (state->hand[currentPlayer][i] == chosenCard) {
 				discardCard(i, currentPlayer, state, 1);
-				break;
 			}
 		}
 	}
@@ -166,6 +165,8 @@ void playTribute(struct gameState *state, int handPos, int* bonus) {
 		// If that single card is in the deck, add it to the tribute.
 		if (state->deckCount[nextPlayer] > 0) {
 			tributeRevealedCards[0] = state->deck[nextPlayer][state->deckCount[nextPlayer] - 1];
+			state->discard[nextPlayer][state->discardCount[nextPlayer]] = state->deck[nextPlayer][state->deckCount[nextPlayer] - 1];
+			state->discardCount[nextPlayer]++;
 			state->deckCount[nextPlayer]--;
 		}
 		// If that single card is in the discard, add it to tribute. 
@@ -189,8 +190,9 @@ void playTribute(struct gameState *state, int handPos, int* bonus) {
 				state->deck[nextPlayer][i] = state->discard[nextPlayer][i];//Move to deck
 				state->deckCount[nextPlayer]++;
 				state->discard[nextPlayer][i] = -1;
-				state->discardCount[nextPlayer]--;
 			}
+
+			state->discardCount[nextPlayer] = 0;
 
 			shuffle(nextPlayer, state);//Shuffle the deck
 		}
@@ -205,8 +207,6 @@ void playTribute(struct gameState *state, int handPos, int* bonus) {
 
 	//If we have a duplicate card, just drop one, adding it to the playedCards.
 	if (tributeRevealedCards[0] == tributeRevealedCards[1]) { 
-		state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
-		state->playedCardCount++;
 		tributeRevealedCards[1] = -1;
 	}
 
@@ -252,7 +252,7 @@ int playMine(int choice1, int choice2, struct gameState *state, int handPos) {
 	}
 
 	// Verify choice2 is within upgrade range
-	if ((getCost(j) + 3) > getCost(choice2)) {
+	if ((getCost(j) + 3) < getCost(choice2)) {
 		return -1;
 	}
 
@@ -263,7 +263,7 @@ int playMine(int choice1, int choice2, struct gameState *state, int handPos) {
 	// choice1 no longer points to the correct card.
 	for (i = 0; i < state->handCount[currentPlayer]; i++) {
 		if (state->hand[currentPlayer][i] == j) {
-			discardCard(i, currentPlayer, state, 1);
+			discardCard(i, currentPlayer, state, 0);
 			break;
 		}
 	}
