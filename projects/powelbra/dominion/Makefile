@@ -6,6 +6,9 @@ rngs.o: rngs.h rngs.c
 cardEffect.o: cardEffect.h cardEffect.c
 	gcc -c cardEffect.c -g $(CFLAGS)
 
+testHelp.o: testHelp.h testHelp.c
+	gcc -c testHelp.c -g $(CFLAGS)
+
 dominion.o: dominion.h dominion.c rngs.o cardEffect.o
 	gcc -c dominion.c -g  $(CFLAGS)
 
@@ -36,8 +39,8 @@ runtests: testDrawCard
 player: player.c interface.o dominion.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o cardEffect.o $(CFLAGS)
 
-unittest1: unittest1.c dominion.o rngs.o cardEffect.o
-	gcc -o unittest1 -g unittest1.c dominion.o rngs.o cardEffect.o $(CFLAGS)
+unittest1: unittest1.c dominion.o rngs.o cardEffect.o testHelp.o
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
 
 all: playdom player 
 
