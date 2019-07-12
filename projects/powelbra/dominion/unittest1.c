@@ -90,7 +90,7 @@ int handNoChange(struct gameState *G, struct gameState *testG) {
 		for (i = 0; i < G->handCount[currentPlayer]; i++) {
 			if (G->hand[currentPlayer][i] != testG->hand[currentPlayer][i]) {
 				printf("Card at position %d changed.\n", i);
-				printf("Original: %d\tNew: %d\n", G->hand[currentPlayer][i], testG->hand[currentPlayer][i]);
+				printf("Original: %d\t\tNew: %d\n", G->hand[currentPlayer][i], testG->hand[currentPlayer][i]);
 				return -1;
 			}
 		}
@@ -113,7 +113,7 @@ int deckNoChange(struct gameState *G, struct gameState *testG) {
 		for (i = 0; i < G->deckCount[currentPlayer]; i++) {
 			if (G->deck[currentPlayer][i] != testG->deck[currentPlayer][i]) {
 				printf("Card at position %d changed.\n", i);
-				printf("Original: %d\tNew: %d\n", G->deck[currentPlayer][i], testG->deck[currentPlayer][i]);
+				printf("Original: %d\t\tNew: %d\n", G->deck[currentPlayer][i], testG->deck[currentPlayer][i]);
 				return -1;
 			}
 		}
@@ -156,13 +156,13 @@ int main() {
 
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
-	printf("Expected buys: 2\tActual buys: %d\n", testG.numBuys);
-	printf("Expected actions: 0\tActual actions: %d\n", testG.numActions);
-	printf("Expected coins: +4\tActual coins: +%d\n", testG.coins - G.coins);
-	printf("Expected handCount: 4\tActual handCount: %d\n", testG.handCount[currentPlayer]);
-	printf("Expected discardCount: 1\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
-	printf("Expected top discard: %d\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
-	printf("Expected deckCount: 5\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
+	printf("Expected buys: 2\t\tActual buys: %d\n", testG.numBuys);
+	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +4\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 4\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected discardCount: 1\t\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
+	printf("Expected top discard: %d\t\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
+	printf("Expected deckCount: 5\t\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
 
 	// Count estates in current and previous hands
 	int prevEstates = 0, curEstates = 0;
@@ -206,14 +206,14 @@ int main() {
 	// Play card
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
-	printf("Expected buys: 2\tActual buys: %d\n", testG.numBuys);
-	printf("Expected actions: 0\tActual actions: %d\n", testG.numActions);
-	printf("Expected coins: +0\tActual coins: +%d\n", testG.coins - G.coins);
-	printf("Expected handCount: 5\tActual handCount: %d\n", testG.handCount[currentPlayer]);
-	printf("Expected discardCount: 1\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
-	printf("Expected top discard: %d\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
-	printf("Expected deckCount: 5\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
-	printf("Expected estate supply: %d\tActual estate supply: %d\n", G.supplyCount[estate] - 1, testG.supplyCount[estate]);
+	printf("Expected buys: 2\t\tActual buys: %d\n", testG.numBuys);
+	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected discardCount: 1\t\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
+	printf("Expected top discard: %d\t\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
+	printf("Expected deckCount: 5\t\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
+	printf("Expected estate supply: %d\t\tActual estate supply: %d\n", G.supplyCount[estate] - 1, testG.supplyCount[estate]);
 	
 	if (oppNoChange(&G, &testG) == -1) {
 		printf("An opponent's state changed!\n");
@@ -243,6 +243,8 @@ int main() {
 	for (i = 0; i < G.handCount[currentPlayer]; i++) {
 		G.hand[currentPlayer][i] = copper;
 	}
+	// Update coins now that hand has changed
+	updateCoins(currentPlayer, &G, 0);
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add baron to the hand
@@ -253,14 +255,14 @@ int main() {
 	// Play card
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
-	printf("Expected buys: 2\tActual buys: %d\n", testG.numBuys);
-	printf("Expected actions: 0\tActual actions: %d\n", testG.numActions);
-	printf("Expected coins: +0\tActual coins: +%d\n", testG.coins - G.coins);
-	printf("Expected handCount: 5\tActual handCount: %d\n", testG.handCount[currentPlayer]);
-	printf("Expected discardCount: 1\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
-	printf("Expected top discard: %d\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
-	printf("Expected deckCount: 5\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
-	printf("Expected estate supply: %d\tActual estate supply: %d\n", G.supplyCount[estate] - 1, testG.supplyCount[estate]);
+	printf("Expected buys: 2\t\tActual buys: %d\n", testG.numBuys);
+	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected discardCount: 1\t\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
+	printf("Expected top discard: %d\t\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
+	printf("Expected deckCount: 5\t\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
+	printf("Expected estate supply: %d\t\tActual estate supply: %d\n", G.supplyCount[estate] - 1, testG.supplyCount[estate]);
 
 	if (oppNoChange(&G, &testG) == -1) {
 		printf("An opponent's state changed!\n");
