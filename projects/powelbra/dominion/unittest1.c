@@ -59,6 +59,8 @@ int oppNoChange(struct gameState *G, struct gameState *testG) {
 			}
 		}
 	}
+	// If loop ends, no change detected
+	return 1;
 }
 
 int main() {
@@ -118,10 +120,10 @@ int main() {
 		printf("Estate count incorrect!\n");
 	}
 	if (kingdomNoChange(&G, &testG) == -1) {
-		printf("A kingdom supply changed!\n")
+		printf("A kingdom supply changed!\n");
 	}
 	if (oppNoChange(&G, &testG) == -1) {
-		printf("An opponent's state changed!\n")
+		printf("An opponent's state changed!\n");
 	}
 
 
