@@ -19,14 +19,14 @@ unittest1: unittest1.c dominion.o rngs.o cardEffect.o
 
 int main() {
 	int i;
-	int handpos = 0, choice1 = 0, choice2 = 0, choice3 = 0 bonus = 0;
+	int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
 
 		
 	// Initialize the game
 	int seed = 100;
 	int numPlayers = 2;
 	struct gameState G, testG;
-	int k[10] = { baron, minion, ambassador, tribute, mine, gardens, village, smithy, market, great_hall };
+	int k[10] = { baron, minion, ambassador, tribute, mine, gardens, village, smithy, adventurer, great_hall };
 
 	initializeGame(numPlayers, k, seed, &G);
 	// Since initialize game gives the player a basic deck, the starting hand has at least 2 estates.
@@ -40,10 +40,10 @@ int main() {
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add baron to the hand
-	int currentPlayer = whoseTurn(testG);
-	testG->hand[currentPlayer][handCount] = baron;
-	handpos = testG->handCount[currentPlayer]
-	testG->handCount[currentPlayer]++;
+	int currentPlayer = whoseTurn(&testG);
+	testG.hand[currentPlayer][testG.handCount] = baron;
+	handpos = testG.handCount[currentPlayer];
+	testG.handCount[currentPlayer]++;
 
 	cardEffect(baron, choice1, choice2, choice3, &testG, handPos, &bonus);
 }
