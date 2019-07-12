@@ -94,7 +94,7 @@ int main() {
 	player++;
 	G.handCount[player] = 4;
 	G.deckCount[player] = 5;
-	for (i = 0; i < G.handCount; i++) {
+	for (i = 0; i < G.handCount[player]; i++) {
 		G.hand[player][i] = copper;
 		G.deck[player][i] = estate;
 	}
@@ -106,13 +106,13 @@ int main() {
 	G.handCount[player] = 5;
 	G.deckCount[player] = 2;
 	G.discardCount[player] = 3;
-	for (i = 0; i < G.handCount; i++) {
+	for (i = 0; i < G.handCount[player]; i++) {
 		G.hand[player][i] = copper;
 	}
-	for (i = 0; i < G.deckCount; i++) {
+	for (i = 0; i < G.deckCount[player]; i++) {
 		G.deck[player][i] = estate;
 	}
-	for (i = 0; i < G.discardCount; i++) {
+	for (i = 0; i < G.discardCount[player]; i++) {
 		G.discard[player][i] = estate;
 	}
 
