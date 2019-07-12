@@ -36,6 +36,9 @@ runtests: testDrawCard
 player: player.c interface.o dominion.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o cardEffect.o $(CFLAGS)
 
+unittest1: unittest1.c dominion.o rngs.o cardEffect.o
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o cardEffect.o $(CFLAGS)
+
 all: playdom player 
 
 clean:

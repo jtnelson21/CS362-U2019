@@ -3,8 +3,8 @@ Author: Brad Powell
 Unit test for the Baron dominion card.
 
 Include in your makefile (cardEffect only if you have a separate file for card effects)
-unittest1: unittest1. dominion.o rngs.o cardEffect.o
-	gcc -o unittest1 -g unittest1.c dominion.o rngs.o cardEffect.o $CFLAGS)
+unittest1: unittest1.c dominion.o rngs.o cardEffect.o
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o cardEffect.o $(CFLAGS)
 */
 
 #include "dominion.h"
