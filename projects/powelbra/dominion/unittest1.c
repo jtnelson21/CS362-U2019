@@ -34,10 +34,10 @@ int main() {
 
 	initializeGame(numPlayers, k, seed, &G);
 
-	printf("----- Testing Card: %s -----\n", TESTCARD);
+	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
 	
 	// ---- Test 1: Discard estate with estate in hand -----
-	printf("----- TEST 1: Choice1 = 1; discard estate -----\n");
+	printf("\n----- TEST 1: Choice1 = 1; discard estate -----\n");
 	int currentPlayer = whoseTurn(&G);
 
 	// Make sure the hand has an estate card

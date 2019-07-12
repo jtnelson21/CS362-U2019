@@ -19,7 +19,8 @@ int handNoChange(struct gameState *G, struct gameState *test);
 // Checks current player's deck
 int deckNoChange(struct gameState *G, struct gameState *test);
 
-
+// Check current player's discard
+int discardNoChange(struct gameState *G, struct gameState *test);
 
 
 #endif
