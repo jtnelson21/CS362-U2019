@@ -63,6 +63,47 @@ int oppNoChange(struct gameState *G, struct gameState *testG) {
 	return 1;
 }
 
+// Verify hand remains unchanged; Assumes played card was last in hand
+// Returns -1 on fail, 1 on success
+int handNoChange(struct gameState *G, struct gameState *testG) {
+	int currentPlayer = whoseTurn(G);
+	int i;
+
+	if (G->handCount[currentPlayer] != testG->handCount[currentPlayer]) {
+		return -1;
+	}
+	else {
+		for (i = 0; i < G->handCount[currentPlayer]; i++) {
+			if (G->hand[currentPlayer][i] != testG->hand[currentPlayer][i]) {
+				return -1;
+			}
+		}
+		// If loop finished, all is well
+		return 1;
+	}
+}
+
+// Verify deck remains unchanged;
+// Returns -1 on fail, 1 on success
+int deckNoChange(struct gameState *G, struct gameState *testG) {
+	int currentPlayer = whoseTurn(G);
+	int i;
+
+	if (G->deckCount[currentPlayer] != testG->deckCount[currentPlayer]) {
+		return -1;
+	}
+	else {
+		for (i = 0; i < G->deckCount[currentPlayer]; i++) {
+			if (G->deck[currentPlayer][i] != testG->deck[currentPlayer][i]) {
+				return -1;
+			}
+		}
+		// If loop finished, all is well
+		return 1;
+	}
+}
+
+
 int main() {
 	int i;
 	int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0, bonus = 0;
@@ -83,20 +124,17 @@ int main() {
 	int currentPlayer = whoseTurn(&G);
 
 	// Make sure the hand has an estate card
-	G.hand[currentPlayer][0] = estate;
+	G.hand[currentPlayer][2] = estate;
 	choice1 = 1;
 
 	// copy the game state for comparison
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add baron to the hand
-
 	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = baron;
 	handPos = testG.handCount[currentPlayer];
 	testG.handCount[currentPlayer]++;
 
-	//cardEffect(baron, choice1, choice2, choice3, &testG, handPos, &bonus);
-	//updateCoins(currentPlayer, &testG, bonus);
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
 	printf("Expected buys: 2\tActual buys: %d\n", testG.numBuys);
@@ -132,6 +170,47 @@ int main() {
 	}
 
 
+	// ---- Test 1: Discard estate with estate in hand -----
+	printf("----- TEST 2: Choice1 = 0; gain estate -----\n");
+	
+	// Reset variables
+	initializeGame(numPlayers, k, seed, &G);
+	currentPlayer = whoseTurn(&G);
+	choice1 = 0;
+	memcpy(&testG, &G, sizeof(struct gameState));
+
+	// Add baron to the hand
+	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = baron;
+	handPos = testG.handCount[currentPlayer];
+	testG.handCount[currentPlayer]++;
+
+	// Play card
+	playCard(handPos, choice1, choice2, choice3, &testG);
+
+	printf("Expected buys: 2\tActual buys: %d\n", testG.numBuys);
+	printf("Expected actions: 0\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +0\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 5\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected discardCount: 1\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
+	printf("Expected top discard: %d\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
+	printf("Expected deckCount: 5\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
+	printf("Expected estate supply: %d\tActual estate supply: %d\n", G.supplyCount[estate] - 1, testG.supplyCount[estate]);
+	
+	if (oppNoChange(&G, &testG) == -1) {
+		printf("An opponent's state changed!\n");
+	}
+	if (handNoChange(&G, &testG) == -1) {
+		printf("The hand was changed!\n");
+	}
+	if (deckNoChange(&G, &testG) == -1) {
+		printf("The deck was changed!\n");
+	}
+	// Reset testG's estate supply to G so kingdomNoChange can be run to detect other changes
+	testG.supplyCount[estate] = G.supplyCount[estate];
+	if (kingdomNoChange(&G, &testG)) {
+		printf("A (non-estate) kingdom supply has changed!\n");
+	}
+	
 }
 
 
