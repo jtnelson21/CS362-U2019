@@ -31,7 +31,7 @@ int main() {
 	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
 
 	// ---- Test 1: +2 coins -----
-	printf("\n----- TEST 1: Choice1 = 1; +2 coins -----\n");
+	printf("\n----- TEST 1: Choice1 = 1; +2 coins -----\nDEBUG statements:\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -48,6 +48,7 @@ int main() {
 	// Play card
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +2\t\tActual coins: +%d\n", testG.coins - G.coins);
@@ -71,7 +72,7 @@ int main() {
 
 
 	// ---- Test 2: Redraw -----
-	printf("\n----- TEST 1: Choice2 = 1; Redraw; attack-----\n");
+	printf("\n----- TEST 2: Choice2 = 1; Redraw; attack-----\nDEBUG statements:\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -126,12 +127,21 @@ int main() {
 	// Play card
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
-	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
 	printf("Expected handCount: 4\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
 	printf("Expected deckCount: %d\t\tActual deckCount: %d\n", G.deckCount[currentPlayer] - 4, testG.deckCount[currentPlayer]);
 	printf("Expected discardCount: %d\tActual discardCount: %d\n", G.discardCount[currentPlayer] + 5, testG.discardCount[currentPlayer]);
+
+	// Coins should equal coppers in hand
+	int copCount;
+	for (i = 0; i < testG.handCount; i++) {
+		if (testG.hand[currentPlayer][i] == copper) {
+			copCount++;
+		}
+	}
+	printf("Expected coins: %d\t\tActual coins: %d\n", copCount, testG.coins);
 
 	if (kingdomNoChange(&G, &testG) == 1) {
 		printf("Kingdom piles ok.\n");

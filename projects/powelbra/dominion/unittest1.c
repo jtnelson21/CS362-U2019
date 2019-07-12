@@ -37,7 +37,7 @@ int main() {
 	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
 	
 	// ---- Test 1: Discard estate with estate in hand -----
-	printf("\n----- TEST 1: Choice1 = 1; discard estate -----\n");
+	printf("\n----- TEST 1: Choice1 = 1; discard estate -----\nDEBUG statements:\n");
 	int currentPlayer = whoseTurn(&G);
 
 	// Make sure the hand has an estate card
@@ -54,6 +54,7 @@ int main() {
 
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected buys: 2\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +4\t\tActual coins: +%d\n", testG.coins - G.coins);
@@ -88,7 +89,7 @@ int main() {
 
 
 	// ---- Test 2: Gain an estate -----
-	printf("\n----- TEST 2: Choice1 = 0; gain estate -----\n");
+	printf("\n----- TEST 2: Choice1 = 0; gain estate -----\nDEBUG statements:\n");
 	
 	// Reset variables
 	initializeGame(numPlayers, k, seed, &G);
@@ -104,6 +105,7 @@ int main() {
 	// Play card
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected buys: 2\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
@@ -131,7 +133,7 @@ int main() {
 
 
 	// ---- Test 3: Try to discard estate when none in hand -----
-	printf("\n----- TEST 3: Choice1 = 1, but no estates in hand -----\n");
+	printf("\n----- TEST 3: Choice1 = 1, but no estates in hand -----\nDEBUG statements:\n");
 
 	// Reset variables
 	initializeGame(numPlayers, k, seed, &G);
@@ -153,6 +155,7 @@ int main() {
 	// Play card
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected buys: 2\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
