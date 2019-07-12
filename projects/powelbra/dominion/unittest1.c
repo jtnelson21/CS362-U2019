@@ -41,8 +41,8 @@ int main() {
 
 	// Add baron to the hand
 	int currentPlayer = whoseTurn(&testG);
-	testG.hand[currentPlayer][testG.handCount] = baron;
-	handpos = testG.handCount[currentPlayer];
+	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = baron;
+	handPos = testG.handCount[currentPlayer];
 	testG.handCount[currentPlayer]++;
 
 	cardEffect(baron, choice1, choice2, choice3, &testG, handPos, &bonus);
