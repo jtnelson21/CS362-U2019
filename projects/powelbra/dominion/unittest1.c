@@ -75,24 +75,29 @@ int main() {
 	int k[10] = { baron, minion, ambassador, tribute, mine, gardens, village, smithy, adventurer, great_hall };
 
 	initializeGame(numPlayers, k, seed, &G);
-	// Since initialize game gives the player a basic deck, the starting hand has at least 2 estates.
 
 	printf("----- Testing Card: %s -----\n", TESTCARD);
 	
 	// ---- Test 1: Discard estate with estate in hand -----
 	printf("----- TEST 1: Choice1 = 1; discard estate -----\n");
+	int currentPlayer = whoseTurn(&G);
+
+	// Make sure the hand has an estate card
+	G.hand[currentPlayer][0] = estate;
+	choice1 = 1;
 
 	// copy the game state for comparison
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add baron to the hand
-	int currentPlayer = whoseTurn(&testG);
+
 	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = baron;
 	handPos = testG.handCount[currentPlayer];
 	testG.handCount[currentPlayer]++;
 
-	cardEffect(baron, choice1, choice2, choice3, &testG, handPos, &bonus);
-	updateCoins(currentPlayer, &testG, bonus);
+	//cardEffect(baron, choice1, choice2, choice3, &testG, handPos, &bonus);
+	//updateCoins(currentPlayer, &testG, bonus);
+	playCard(handPos, choice1, choice2, choice3, &testG);
 
 	printf("Expected buys: 2\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 0\tActual actions: %d\n", testG.numActions);
