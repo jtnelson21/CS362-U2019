@@ -16,6 +16,7 @@ unittest1: unittest1.c dominion.o rngs.o cardEffect.o
 #include <stdlib.h>
 
 #define TESTCARD "baron"
+#define DEBUG 1
 
 // Verify none of the supply piles have changed
 // Returns -1 On fail, 1 on success
@@ -160,7 +161,7 @@ int main() {
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +4\t\tActual coins: +%d\n", testG.coins - G.coins);
 	printf("Expected handCount: 4\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
-	printf("Expected discardCount: 1\t\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
+	printf("Expected discardCount: 1\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
 	printf("Expected top discard: %d\t\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
 	printf("Expected deckCount: 5\t\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
 
@@ -190,7 +191,7 @@ int main() {
 
 
 	// ---- Test 2: Gain an estate -----
-	printf("----- TEST 2: Choice1 = 0; gain estate -----\n");
+	printf("\n----- TEST 2: Choice1 = 0; gain estate -----\n");
 	
 	// Reset variables
 	initializeGame(numPlayers, k, seed, &G);
@@ -210,7 +211,7 @@ int main() {
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
 	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
-	printf("Expected discardCount: 1\t\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
+	printf("Expected discardCount: 1\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
 	printf("Expected top discard: %d\t\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
 	printf("Expected deckCount: 5\t\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
 	printf("Expected estate supply: %d\t\tActual estate supply: %d\n", G.supplyCount[estate] - 1, testG.supplyCount[estate]);
@@ -233,7 +234,7 @@ int main() {
 
 
 	// ---- Test 3: Try to discard estate when none in hand -----
-	printf("----- TEST 3: Choice1 = 1, but no estates in hand -----\n");
+	printf("\n----- TEST 3: Choice1 = 1, but no estates in hand -----\n");
 
 	// Reset variables
 	initializeGame(numPlayers, k, seed, &G);
@@ -259,7 +260,7 @@ int main() {
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
 	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
-	printf("Expected discardCount: 1\t\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
+	printf("Expected discardCount: 1\tActual discardCount: %d\n", testG.discardCount[currentPlayer]);
 	printf("Expected top discard: %d\t\tActual top discard: %d\n", estate, testG.discard[currentPlayer][testG.discardCount[currentPlayer] - 1]);
 	printf("Expected deckCount: 5\t\tActual deckCount: %d\n", testG.deckCount[currentPlayer]);
 	printf("Expected estate supply: %d\t\tActual estate supply: %d\n", G.supplyCount[estate] - 1, testG.supplyCount[estate]);
