@@ -147,7 +147,7 @@ int main() {
 	// Make sure cards in deck weren't changed (cards 10-14)
 	for (i = 0; i < testG.deckCount[2]; i++) {
 		if (testG.deck[2][i] < 10 || testG.deck[2][i] > 14) {
-			prinft("Card at position %d was not originally in the deck.\n", i);
+			printf("Card at position %d was not originally in the deck.\n", i);
 		}
 	}
 
@@ -175,8 +175,8 @@ int main() {
 
 	// Testing boundary cases: 1 and 2 cards in deck
 	// All players are duplicate for 2 cards due to limited combination of options (2 shuffles could easily be the same order of cards)
-	prinft("\n----- TEST 4: 1 card in deck -----\n");
-	G.deckCount = 1;
+	printf("\n----- TEST 4: 1 card in deck -----\n");
+	G.deckCount[0] = 1;
 	G.deck[0][0] = copper;
 	memcpy(&testG, &G, sizeof(struct gameState));
 	errTest[0] = shuffle(0, &testG);
@@ -185,7 +185,7 @@ int main() {
 		printf("Card unchanged.\n");
 	}
 	else {
-		prinft("Card changed when 'shuffled.'\n");
+		printf("Card changed when 'shuffled.'\n");
 	}
 	
 	
