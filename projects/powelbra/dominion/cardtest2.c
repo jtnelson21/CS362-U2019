@@ -17,7 +17,7 @@ cardtest1: cardtest1.c dominion.o rngs.o cardEffect.o testHelp.o
 #define TESTFUNCTION "Shuffle"
 
 int main() {
-	int i, j, sentinel;	// 4 players to work with most number of decks at once
+	int i, sentinel;
 	int errTest[4];
 	// k just for initialization
 	int k[10] = { baron, minion, ambassador, tribute, mine, gardens, village, smithy, adventurer, great_hall };
@@ -144,6 +144,12 @@ int main() {
 	else {
 		printf("Played count NOT ok.\n");
 	}
+	// Make sure cards in deck weren't changed (cards 10-14)
+	for (i = 0; i < testG.deckCount[2]; i++) {
+		if (testG.deck[2][i] < 10 || testG.deck[2][i] > 14) {
+			prinft("Card at position %d was not originally in the deck.\n", i);
+		}
+	}
 
 	// ----- Test 3: Error -----
 	printf("\n----- TEST 3: Empty deck, nothing changes -----\n");
@@ -164,9 +170,55 @@ int main() {
 		printf("Deck count ok.\t");
 	}
 	else {
-		printf("Deck count NOT ok.\t");
+		printf("Deck count NOT ok.\n");
 	}
 
+	// Testing boundary cases: 1 and 2 cards in deck
+	// All players are duplicate for 2 cards due to limited combination of options (2 shuffles could easily be the same order of cards)
+	prinft("\n----- TEST 4: 1 card in deck -----\n");
+	G.deckCount = 1;
+	G.deck[0][0] = copper;
+	memcpy(&testG, &G, sizeof(struct gameState));
+	errTest[0] = shuffle(0, &testG);
+	printf("Returned value should be 0: %d\n", errTest[0]);
+	if (G.deck[0][0] == testG.deck[0][0]) {
+		printf("Card unchanged.\n");
+	}
+	else {
+		prinft("Card changed when 'shuffled.'\n");
+	}
+	
+	
+	printf("\n----- TEST  5: 2 cards in deck -----\n");
+	G.handCount[0] = G.handCount[1] = G.handCount[2] = G.handCount[3] = 0;
+	G.discardCount[0] = G.discardCount[1] = G.discardCount[2] = G.discardCount[3] = 0;
+	G.deckCount[0] = G.deckCount[1] = G.deckCount[2] = G.deckCount[3] = 2;
+	for (i = 0; i < G.deckCount[0]; i++) {
+		G.deck[0][i] = G.deck[1][i] = G.deck[2][i] = G.deck[3][i] = i;	// Curse and estate
+	}
+	memcpy(&testG, &G, sizeof(struct gameState));
+	for (i = 0; i < 4; i++) {
+		errTest[i] = shuffle(i, &testG);
+	}
+	
+	printf("Returned values should be 0: %d\t%d\t%d\t%d\n", errTest[0], errTest[1], errTest[2], errTest[3]);
+
+	sentinel = 0;
+	
+	for (i = 0; i < 3; i++) {	// Compare first card in deck with next player
+		if (G.deck[i][0] != G.deck[i + 1][0]) {	
+			sentinel = 1;
+		}
+	}
+	if (G.deck[0][0] != G.deck[3][0]) {	// Compare first and last player
+		sentinel = 1;
+	}
+	if (sentinel) {
+		printf("At least 2 decks are different.\n");
+	}
+	else {
+		printf("All decks are the same.\n");
+	}
 
 	return 0;
 }
