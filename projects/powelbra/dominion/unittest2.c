@@ -62,7 +62,7 @@ int main() {
 	if (discardCheck(currentPlayer, &G, &testG) == 1) {
 		printf("Discard ok.\n");
 	}
-	if (oppCheck(&G, &testG) == 1) {
+	if (oppNoChange(&G, &testG) == 1) {
 		printf("Opponents ok.\n");
 	}
 	if (kingdomNoChange(&G, &testG) == 1) {
