@@ -27,13 +27,13 @@ void testMine(int trash, int target, int expect) {
 	struct gameState G, testG;
 
 	// Set up game
-	initializeGame(numPlayers, k, seed, G);
-	currentPlayer = whoseTurn(G);
+	initializeGame(numPlayers, k, seed, &G);
+	currentPlayer = whoseTurn(&G);
 	G.hand[currentPlayer][0] = trash;	// make sure there's a treasure to use
 	choice1 = 0;
 	choice2 = target;
-	updateCoins(currentPlayer, G, 0);
-	memcpy(&testG, G, sizeof(struct gameState));
+	updateCoins(currentPlayer, &G, 0);
+	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add mine to hand
 	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = mine;
@@ -108,7 +108,7 @@ int main() {
 	printf("\n----- TEST 2: copper -> silver -----\nDEBUG statements:\n");
 	testMine(copper, silver, 1);
 	printf("\n----- TEST 3: copper -> gold -----\nDEBUG statements:\n");
-	testMine(copper, gold, 0)
+	testMine(copper, gold, 0);
 	printf("\n----- TEST 4: silver -> copper -----\nDEBUG statements:\n");
 	testMine(silver, copper, -1);
 	printf("\n----- TEST 5: silver -> silver -----\nDEBUG statements:\n");
