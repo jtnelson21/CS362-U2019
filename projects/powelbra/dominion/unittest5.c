@@ -22,7 +22,7 @@ void testMine(int trash, int target, int expect, struct gameState *G) {
 	int seed = 100;
 	int numPlayers = 2;
 	int k[10] = { baron, minion, ambassador, tribute, mine, gardens, village, smithy, adventurer, great_hall };
-	int i, currentPlayer, errTest;
+	int currentPlayer, errTest;
 	int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0;
 	struct gameState testG;
 
@@ -69,6 +69,7 @@ void testMine(int trash, int target, int expect, struct gameState *G) {
 		printf("\nExpected: %d\tActual: %d\n", G->supplyCount[choice2] - 1, testG.supplyCount[choice2]);
 
 
+	}
 }
 
 
