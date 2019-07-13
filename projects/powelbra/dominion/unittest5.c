@@ -37,7 +37,7 @@ int main() {
 	initializeGame(numPlayers, k, seed, &G);
 	currentPlayer = whoseTurn(&G);
 	G.hand[currentPlayer][0] = copper;	// make sure there's a treasure to use
-	choice1 = 1;
+	choice1 = 0;
 	choice2 = silver;
 	updateCoins(currentPlayer, &G, 0);
 	memcpy(&testG, &G, sizeof(struct gameState));
@@ -71,6 +71,9 @@ int main() {
 	printf("Supply pile %d should change: ", silver);
 	if (kingdomNoChange(&G, &testG) != 1) {
 		printf("Supply didn't change!\n");
+	}
+	else {
+		printf("\n");
 	}
 	// 	printf("Supply pile %d, Expected: %d\tActual: %d\n", silver, G.supplyCount[silver] - 1, testG.supplyCount[silver]);
 
