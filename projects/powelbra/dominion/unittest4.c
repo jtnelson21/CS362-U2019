@@ -53,7 +53,8 @@ int main() {
 	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 3\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
-	printf("Expected handCount: 4\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected played cards: 1\tActual played cards: %d\n", testG.playedCardCount);
 
 	if (deckCheck(currentPlayer, &G, &testG) == 1) {
 		printf("Deck ok.\n");
