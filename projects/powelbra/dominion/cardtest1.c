@@ -9,7 +9,6 @@ cardtest1: cardtest1.c dominion.o rngs.o cardEffect.o testHelp.o
 
 #include "dominion.h"
 #include "dominion_helpers.h"
-#include "cardEffect.h"
 #include "rngs.h"
 #include "interface.h"	// For cardNumToName function
 #include <string.h>
@@ -121,10 +120,10 @@ int main() {
 				}
 			}
 			if (sentinel) {
-				printf("Players %d and %d have different decks.\n", i, i + 1);
+				printf("Players %d and %d have different decks.\n", i + 1, i + 2);
 			}
 			else {
-				printf("Players %d and %d have the same deck!\n", i, i + 1);
+				printf("Players %d and %d have the same deck!\n", i + 1, i + 2);
 			}
 		}
 	}
