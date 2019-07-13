@@ -614,7 +614,7 @@ int main() {
 	// Verify opponent's hands and decks are unchanged.
 	// Opponents 1 and 2 should should receive smithies, the third unchanged
 	printf("Players 1 and 2 should receive smithies. The third should be unchanged.\n");
-	for (i = 1; i < testG.numPlayers; i++) {
+	for (i = 1; i < testG.numPlayers-1; i++) {
 		printf("-- Player %d --\n", i);
 		if (handCheck(i, &G, &testG)) {
 			printf("Hand ok.\n");
@@ -626,6 +626,18 @@ int main() {
 		printf("Expected discardCount: %d\tActual discardCount: %d\n", G.discardCount[i] + 1, testG.discardCount[i]);
 		printf("Expected top discard: %d\tActual top discard: %d\n", smithy, testG.discard[i][testG.discardCount[i] - 1]);
 	}
+
+	printf("-- Player %d --\n", i);
+	if (handCheck(i, &G, &testG)) {
+		printf("Hand ok.\n");
+	}
+	if (deckCheck(i, &G, &testG)) {
+		printf("Deck ok.\n");
+	}
+
+	printf("Expected discardCount: 0\tActual discardCount: %d\n", testG.discardCount[i]);
+	printf("Expected top discard: 0\tActual top discard: %d\n", testG.discard[i][testG.discardCount[i] - 1]);
+
 
 	// Verify smithy pile is 0
 	printf("Expected smithy supply: 0\tActual smithy supply: %d\n", testG.supplyCount[smithy]);
