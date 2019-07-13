@@ -31,7 +31,7 @@ int main() {
 	printf("\n----- TEST 1: Number of players\nShould return -1 on <2 or >4 players, 0 otherwise -----\n");
 	// Initialize the five gameStates with different player counts, different seeds
 	for (numPlayers = 1; numPlayers <= 5; numPlayers++) {
-		printf("%d players: %d\n", i, initializeGame(numPlayers, k, seed*numPlayers, &G[numPlayers - 1]));
+		printf("%d players: %d\n", numPlayers, initializeGame(numPlayers, k, seed*numPlayers, &G[numPlayers - 1]));
 	}
 
 	// ----- Test 2: Treasure/VP piles -----
@@ -51,7 +51,7 @@ int main() {
 	// ----- Test 3: Kingdom Piles -----
 	printf("\n----- TEST 3: Kingdom Piles -----\n");
 	printf("Chosen kingdom piles should be at 10, rest -1.\n");
-	printf("Chosen piles:\n Baron\tMinion\tAmbassador\tTribute\tMine\nGardens\tVillage\tSmithy\tAdventurer\tGreat Hall\n");
+	printf("Chosen piles:\nBaron\tMinion\tAmbassador\tTribute\tMine\nGardens\tVillage\tSmithy\tAdventurer\tGreat Hall\n");
 	printf("Exception: For 2 players, Gardens and Great Hall at 8, otherwise 12.\n");
 	for (numPlayers = 2; numPlayers < 5; numPlayers++) {
 		printf("-Players: %d-\n", numPlayers);
@@ -66,6 +66,7 @@ int main() {
 				printf("\t");
 			}
 		}
+		printf("\n");
 	}
 
 	// ----- Test 4: Player Decks -----
@@ -133,7 +134,7 @@ int main() {
 	for (numPlayers = 2; numPlayers < 5; numPlayers++) {
 		// Count up coppers
 		int numCop = 0;
-		for (j = 0; j < G[numPlayers - 1].handCount[i]; j++) {
+		for (j = 0; j < G[numPlayers - 1].handCount[0]; j++) {
 			if (G[numPlayers - 1].hand[0][j] == copper) {
 				numCop++;
 			}
