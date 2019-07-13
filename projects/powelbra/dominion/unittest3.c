@@ -39,6 +39,7 @@ int main() {
 	G.hand[currentPlayer][1] = smithy;	// Set second card in hand to be a smithy
 	choice1 = 1;	// smithy handPos
 	choice2 = 1;	// # smithies to return
+	updateCoins(currentPlayer, &G, 0);	// Update coins incase copper was replaced
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add ambassador to hand
@@ -51,7 +52,7 @@ int main() {
 
 	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
-	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
 	printf("Expected handCount: 4\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
 	printf("Expected playedCardCount: 1\tActual playedCardCount: %d\n", testG.playedCardCount);
@@ -118,6 +119,7 @@ int main() {
 	G.hand[currentPlayer][0] = smithy;	// Set first card to smithy
 	choice1 = 1;	// smithy handPos
 	choice2 = 2;	// # smithies to return
+	updateCoins(currentPlayer, &G, 0);	// Update coins incase copper was replaced
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add ambassador to hand
@@ -130,13 +132,13 @@ int main() {
 
 	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
-	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
 	printf("Expected handCount: 3\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
 	printf("Expected playedCardCount: 1\tActual playedCardCount: %d\n", testG.playedCardCount);
 
 	// Make sure hand is otherwise unaffected
-	int handChck = 1;
+	handChck = 1;
 	// Since handPos=0, 1 was smithy and those cards shifted left, testG hand 0 == G hand 2
 	for (i = 0; i < testG.handCount[currentPlayer]; i++) {
 		if (testG.hand[currentPlayer][i] != G.hand[currentPlayer][i + 2]) {
@@ -182,7 +184,69 @@ int main() {
 	}
 
 
+	// ---- Test 3: Reveal and return 0 cards -----
+	printf("\n----- TEST 3: Reveal and return 0 cards -----\nDEBUG statements:\n");
 
+	// Set up game
+	initializeGame(numPlayers, k, seed, &G);
+	currentPlayer = whoseTurn(&G);
+	G.hand[currentPlayer][1] = smithy;	// Set second card in hand to be a smithy
+	choice1 = 1;	// smithy handPos
+	choice2 = 0;	// # smithies to return
+	updateCoins(currentPlayer, &G, 0);	// Update coins incase copper was replaced
+	memcpy(&testG, &G, sizeof(struct gameState));
+
+	// Add ambassador to hand
+	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = ambassador;
+	handPos = testG.handCount[currentPlayer];
+	testG.handCount[currentPlayer]++;
+
+	// Play card
+	playCard(handPos, choice1, choice2, choice3, &testG);
+
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
+	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
+	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected playedCardCount: 1\tActual playedCardCount: %d\n", testG.playedCardCount);
+
+	// Make sure hand is unaffected
+	if (handCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Hand ok.\n");
+	}
+	// Verify current player's hand and discard are unchanged
+	if (deckCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Deck ok.\n");
+	}
+	if (discardCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Discard ok.\n");
+	}
+
+	// Verify opponent's hands and decks are unchanged.
+	// Also verify their discard count increase by 1 and the top card is a smithy
+	for (i = 1; i < testG.numPlayers; i++) {
+		printf("-- Player %d --\n", i);
+		if (handCheck(i, &G, &testG)) {
+			printf("Hand ok.\n");
+		}
+		if (deckCheck(i, &G, &testG)) {
+			printf("Deck ok.\n");
+		}
+
+		printf("Expected discardCount: %d\tActual discardCount: %d\n", G.discardCount[i] + 1, testG.discardCount[i]);
+		printf("Expected top discard: %d\tActual top discard: %d\n", smithy, testG.discard[i][testG.discardCount[i] - 1]);
+	}
+
+	// Verify smithy pile has reduced accordingly
+	// Should be smithy supply + 0 - number of oppoenents; formula is +1 to account for numPlayers including current player
+	printf("Expected smithy supply: %d\tActual smithy supply: %d\n", G.supplyCount[smithy] + 1 - G.numPlayers, testG.supplyCount[smithy]);
+
+	// Reset smithy pile in order to run kingdomNoChange to check other piles.
+	testG.supplyCount[smithy] = G.supplyCount[smithy];
+	if (kingdomNoChange(&G, &testG) == 1) {
+		printf("Kingdom piles ok.\n");
+	}
 
 
 
