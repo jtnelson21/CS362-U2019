@@ -174,7 +174,7 @@ int main() {
 	}
 
 	// Testing boundary cases: 1 and 2 cards in deck
-	// All players are duplicate for 2 cards due to limited combination of options (2 shuffles could easily be the same order of cards)
+	// Extra players added due to limited combination of options (2 shuffles could easily be the same order of cards)
 	printf("\n----- TEST 4: 1 card in deck -----\n");
 	G.deckCount[0] = 1;
 	G.deck[0][0] = copper;
@@ -190,6 +190,9 @@ int main() {
 	
 	
 	printf("\n----- TEST  5: 2 cards in deck -----\n");
+	struct gameState testG2, testG3;
+	int errTest2[4];
+	int errTest3[4];
 	G.handCount[0] = G.handCount[1] = G.handCount[2] = G.handCount[3] = 0;
 	G.discardCount[0] = G.discardCount[1] = G.discardCount[2] = G.discardCount[3] = 0;
 	G.deckCount[0] = G.deckCount[1] = G.deckCount[2] = G.deckCount[3] = 2;
@@ -197,20 +200,27 @@ int main() {
 		G.deck[0][i] = G.deck[1][i] = G.deck[2][i] = G.deck[3][i] = i;	// Curse and estate
 	}
 	memcpy(&testG, &G, sizeof(struct gameState));
+	memcpy(&testG2, &G, sizeof(struct gameState));
+	memcpy(&testG3, &G, sizeof(struct gameState));
 	for (i = 0; i < 4; i++) {
 		errTest[i] = shuffle(i, &testG);
+		errTest2[i] = shuffle(i, &testG2);
+		errTest3[i] = shuffle(i, &testG3);
 	}
 	
-	printf("Returned values should be 0: %d\t%d\t%d\t%d\n", errTest[0], errTest[1], errTest[2], errTest[3]);
+	printf("Returned values should be 0:");
+	for (i = 0; i < 4; i++) {
+		printf("%d\t%d\t%d\t", errTest[i], errTest2[i], errTest3[i]);
+	}
 
 	sentinel = 0;
 	
 	for (i = 0; i < 3; i++) {	// Compare first card in deck with next player
-		if (G.deck[i][0] != G.deck[i + 1][0]) {	
+		if (testG.deck[i][0] != testG.deck[i + 1][0]) {	
 			sentinel = 1;
 		}
 	}
-	if (G.deck[0][0] != G.deck[3][0]) {	// Compare first and last player
+	if (testG.deck[0][0] != testG.deck[3][0]) {	// Compare first and last player
 		sentinel = 1;
 	}
 	if (sentinel) {
