@@ -31,7 +31,7 @@ int main() {
 	printf("\n----- TEST 1: Number of players\nShould return -1 on <2 or >4 players, 0 otherwise -----\n");
 	// Initialize the five gameStates with different player counts, different seeds
 	for (numPlayers = 1; numPlayers <= 5; numPlayers++) {
-		printf("%d players: %d\n", i, initializeGame(numPlayers, k, seed*numPlayers, &G[numPlayers - 1]);
+		printf("%d players: %d\n", i, initializeGame(numPlayers, k, seed*numPlayers, &G[numPlayers - 1]));
 	}
 
 	// ----- Test 2: Treasure/VP piles -----
@@ -143,7 +143,7 @@ int main() {
 		printf("Expected actions: 1\t\tActual actions: %d\n", G[numPlayers - 1].numActions);
 		printf("Expected coins: %d\t\tActual coins: %d\n", numCop, G[numPlayers - 1].coins);
 		printf("Expected played count: 0\t Actual played count: %d\n", G[numPlayers - 1].playedCardCount);
-		printf("Whose turn should be 0: %d\n", whoseTurn(G[numPlayers - 1]));
+		printf("Whose turn should be 0: %d\n", whoseTurn(&G[numPlayers - 1]));
 	}
 	
 
