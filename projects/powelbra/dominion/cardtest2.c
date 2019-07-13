@@ -167,7 +167,7 @@ int main() {
 		printf("Discard count NOT ok.\t");
 	}
 	if (testG.deckCount[3] == G.deckCount[3]) {
-		printf("Deck count ok.\t");
+		printf("Deck count ok.\n");
 	}
 	else {
 		printf("Deck count NOT ok.\n");
@@ -190,28 +190,22 @@ int main() {
 	
 	
 	printf("\n----- TEST  5: 2 cards in deck -----\n");
-	struct gameState testG2, testG3;
-	int errTest2[4];
-	int errTest3[4];
 	G.handCount[0] = G.handCount[1] = G.handCount[2] = G.handCount[3] = 0;
 	G.discardCount[0] = G.discardCount[1] = G.discardCount[2] = G.discardCount[3] = 0;
 	G.deckCount[0] = G.deckCount[1] = G.deckCount[2] = G.deckCount[3] = 2;
 	for (i = 0; i < G.deckCount[0]; i++) {
 		G.deck[0][i] = G.deck[1][i] = G.deck[2][i] = G.deck[3][i] = i;	// Curse and estate
 	}
-	memcpy(&testG, &G, sizeof(struct gameState));
-	memcpy(&testG2, &G, sizeof(struct gameState));
-	memcpy(&testG3, &G, sizeof(struct gameState));
+
 	for (i = 0; i < 4; i++) {
 		errTest[i] = shuffle(i, &testG);
-		errTest2[i] = shuffle(i, &testG2);
-		errTest3[i] = shuffle(i, &testG3);
 	}
 	
-	printf("Returned values should be 0:");
+	printf("Returned values should be 0: ");
 	for (i = 0; i < 4; i++) {
-		printf("%d\t%d\t%d\t", errTest[i], errTest2[i], errTest3[i]);
+		printf("%d\t", errTest[i]);
 	}
+	printf("\n");
 
 	sentinel = 0;
 	
