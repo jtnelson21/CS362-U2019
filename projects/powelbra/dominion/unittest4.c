@@ -160,9 +160,16 @@ int main() {
 	// Play card
 	playCard(handPos, choice1, choice2, choice3, &testG);
 
+	// Expected coins in this case should be equal to the coppers in hand, which might be higher after the draw
+	int copCount;
+	for (i = 0; i < testG.handCount[currentPlayer]; i++) {
+		if (testG.hand[currentPlayer][i] == copper) {
+			copCount++;
+		}
+	}
 	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
-	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected coins: %d\t\tActual coins: +%d\n", copCount, testG.coins);
 	printf("Expected handCount: 9\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
 	printf("Expected played cards: 1\tActual played cards: %d\n", testG.playedCardCount);
 	// Drawing cards could cause a shuffle, so the total discard/deck combo needs to be consistent with drawing cards
