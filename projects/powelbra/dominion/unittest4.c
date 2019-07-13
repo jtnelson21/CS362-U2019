@@ -353,4 +353,6 @@ int main() {
 	// Check changes in next player
 	printf("Next player expected dicardCount: 0\tActual discardCount: %d\n", testG.discardCount[player]);
 	printf("Next player expected deckCount: 0\tActual deckCount: %d\n", testG.deckCount[player]);
+
+	return 0;
 }

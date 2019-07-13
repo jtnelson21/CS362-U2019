@@ -224,5 +224,5 @@ int main() {
 		printf("Opponent %d has wrong deckCount of %d, should be 6.\n", player, testG.deckCount[player]);
 	}
 
-
+	return 0;
 }

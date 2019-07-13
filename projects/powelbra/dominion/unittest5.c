@@ -19,6 +19,9 @@ unittest1: unittest5.c dominion.o rngs.o cardEffect.o testHelp.o
 #define TESTCARD "Mine"
 
 void testMine(int trash, int target, int expect, struct gameState *G) {
+	int seed = 100;
+	int numPlayers = 2;
+	int k[10] = { baron, minion, ambassador, tribute, mine, gardens, village, smithy, adventurer, great_hall };
 	int i, currentPlayer, errTest;
 	int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0;
 	struct gameState testG;
@@ -63,18 +66,15 @@ void testMine(int trash, int target, int expect, struct gameState *G) {
 		printf("Supply didn't change!\n");
 	}
 	else {
-		printf("\nExpected: %d\tActual: %d\n", choice2, G->supplyCount[choice2] - 1, testG.supplyCount[choice2]);
+		printf("\nExpected: %d\tActual: %d\n", G->supplyCount[choice2] - 1, testG.supplyCount[choice2]);
 
 
 }
 
 
 int main() {
-	// Initialize the game
-	int seed = 100;
-	int numPlayers = 2;
 	struct gameState G;
-	int k[10] = { baron, minion, ambassador, tribute, mine, gardens, village, smithy, adventurer, great_hall };
+	
 
 	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
 
@@ -96,6 +96,6 @@ int main() {
 
 
 
-
+	return 0;
 
 }

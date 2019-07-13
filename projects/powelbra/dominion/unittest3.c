@@ -648,5 +648,5 @@ int main() {
 		printf("Kingdom piles ok.\n");
 	}
 
-
+	return 0;
 }
