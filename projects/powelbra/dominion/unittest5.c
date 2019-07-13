@@ -19,7 +19,7 @@ unittest1: unittest5.c dominion.o rngs.o cardEffect.o testHelp.o
 #define TESTCARD "Mine"
 
 int main() {
-	int i, currentPlayer;
+	int i, currentPlayer, errTest;
 	int handPos = 0, choice1 = 0, choice2 = 0, choice3 = 0;
 
 	// Initialize the game
@@ -48,13 +48,14 @@ int main() {
 	testG.handCount[currentPlayer]++;
 
 	// Play card
-	playCard(handPos, choice1, choice2, choice3, &testG);
+	errTest = playCard(handPos, choice1, choice2, choice3, &testG);
 
 	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
+	printf("Should be 0: %d\n", errTest);
 	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coin value: +1\t\tActual coins: +%d\n", testG.coins - G.coins);
-	printf("Expected handCount: 5\t\tActual hancount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
 
 	if (deckCheck(currentPlayer, &G, &testG) == 1) {
 		printf("Deck ok.\t");
@@ -68,8 +69,10 @@ int main() {
 	
 	// Check only the target treasure changes
 	printf("Supply pile %d should change: ", silver);
-	kingdomNoChange(&G, &testG);
-
+	if (kingdomNoChange(&G, &testG) != 1) {
+		printf("Supply didn't change!\n");
+	}
+	// 	printf("Supply pile %d, Expected: %d\tActual: %d\n", silver, G.supplyCount[silver] - 1, testG.supplyCount[silver]);
 
 
 
