@@ -39,7 +39,6 @@ int main() {
 	player = currentPlayer + 1;
 	G.deck[player][G.deckCount[player] - 1] = baron;
 	G.deck[player][G.deckCount[player] - 2] = smithy;
-	updateCoins(currentPlayer, &G, 0);
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add tribute to hand
@@ -103,7 +102,6 @@ int main() {
 	G.deckCount[player] = 1;
 	G.discard[player][0] = silver;
 	G.discardCount[player] = 1;
-	updateCoins(currentPlayer, &G, 0);
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add tribute to hand
@@ -149,7 +147,6 @@ int main() {
 	G.discard[player][0] = estate;
 	G.discard[player][1] = duchy;
 	G.discardCount[player] = 2;
-	updateCoins(currentPlayer, &G, 0);
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add tribute to hand
@@ -169,7 +166,7 @@ int main() {
 	}
 	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
 	printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
-	printf("Expected coins: %d\t\tActual coins: +%d\n", copCount, testG.coins);
+	printf("Expected coins: %d\t\tActual coins: %d\n", copCount, testG.coins);
 	printf("Expected handCount: 9\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
 	printf("Expected played cards: 1\tActual played cards: %d\n", testG.playedCardCount);
 	// Drawing cards could cause a shuffle, so the total discard/deck combo needs to be consistent with drawing cards
@@ -184,7 +181,47 @@ int main() {
 	printf("Next player expected deckCount: %d\tActual deckCount: %d\n", G.discardCount[player] - 2, testG.deckCount[player]);
 
 
+	// ---- Test 4: Duplicatecards -----
+	printf("\n----- TEST 2: 4 duplicate cards -----\nDEBUG statements:\n");
 
+	// Set up game
+	initializeGame(numPlayers, k, seed, &G);
+	currentPlayer = whoseTurn(&G);
+	player = currentPlayer + 1;
+	G.deck[player][G.deckCount[player] - 1] = baron;
+	G.deck[player][G.deckCount[player] - 2] = baron;
+	memcpy(&testG, &G, sizeof(struct gameState));
+
+	// Add tribute to hand
+	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = tribute;
+	handPos = testG.handCount[currentPlayer];
+	testG.handCount[currentPlayer]++;
+
+	// Play card
+	playCard(handPos, choice1, choice2, choice3, &testG);
+
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
+	printf("Expected actions: 2\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected played cards: 1\tActual played cards: %d\n", testG.playedCardCount);
+
+	if (handCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Hand ok.\t");
+	}
+	if (deckCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Deck ok.\t");
+	}
+	if (discardCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Discard ok.\n");
+	}
+	if (kingdomNoChange(&G, &testG) == 1) {
+		printf("Kingdom piles ok.\n");
+	}
+
+	// Check changes in next player
+	printf("Next player expected dicardCount: 2\tActual discardCount: %d\n", testG.discardCount[player]);
+	printf("Next player expected deckCount: %d\tActual deckCount: %d\n", G.deckCount[player] - 2, testG.deckCount[player]);
 
 
 
