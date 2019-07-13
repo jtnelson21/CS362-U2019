@@ -249,10 +249,106 @@ int main() {
 	}
 
 
+	// ---- Test 4: Return when there isn't one -----
+	printf("\n----- TEST 4: Attempt to return more cards than in hand -----\nDEBUG statements:\n");
+
+	// Set up game
+	initializeGame(numPlayers, k, seed, &G);
+	currentPlayer = whoseTurn(&G);
+	G.hand[currentPlayer][1] = smithy;	// Set second card in hand to be a smithy
+	choice1 = 1;	// smithy handPos
+	choice2 = 2;	// # smithies to return
+	updateCoins(currentPlayer, &G, 0);	// Update coins incase copper was replaced
+	memcpy(&testG, &G, sizeof(struct gameState));
+
+	// Add ambassador to hand
+	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = ambassador;
+	handPos = testG.handCount[currentPlayer];
+	testG.handCount[currentPlayer]++;
+
+	// Play card
+	int errTest = playCard(handPos, choice1, choice2, choice3, &testG);
+
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
+	printf("Should be -1: %d\n", errTest);
+	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
+	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 6\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected playedCardCount: 0\tActual playedCardCount: %d\n", testG.playedCardCount);
+
+	// Make sure hand is unaffected
+	if (handCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Hand ok.\n");
+	}
+	// Verify current player's hand and discard are unchanged
+	if (deckCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Deck ok.\n");
+	}
+	if (discardCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Discard ok.\n");
+	}
+
+	// Opponents should be entirely unaffected
+	if (oppNoChange(&G, &testG) == 1) {
+		printf("Opponents ok.\n");
+	}
+
+	// Kingdom cards should be unaffected
+	if (kingdomNoChange(&G, &testG) == 1) {
+		printf("Kingdom piles ok.\n");
+	}
 
 
+	// ---- Test 5: Attempt to return more cards -----
+	printf("\n----- TEST 5: Attempt to return more than 2 cards -----\nDEBUG statements:\n");
 
+	// Set up game
+	initializeGame(numPlayers, k, seed, &G);
+	currentPlayer = whoseTurn(&G);
+	G.hand[currentPlayer][1] = G.hand[currentPlayer][0] = G.hand[currentPlayer][2] = smithy;	// Set cards in hand to be a smithy
+	choice1 = 1;	// smithy handPos
+	choice2 = 3;	// # smithies to return
+	updateCoins(currentPlayer, &G, 0);	// Update coins incase copper was replaced
+	memcpy(&testG, &G, sizeof(struct gameState));
 
+	// Add ambassador to hand
+	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = ambassador;
+	handPos = testG.handCount[currentPlayer];
+	testG.handCount[currentPlayer]++;
+
+	// Play card
+	errTest = playCard(handPos, choice1, choice2, choice3, &testG);
+
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
+	printf("Should be -1: %d\n", errTest);
+	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
+	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 6\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected playedCardCount: 0\tActual playedCardCount: %d\n", testG.playedCardCount);
+
+	// Make sure hand is unaffected
+	if (handCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Hand ok.\n");
+	}
+	// Verify current player's hand and discard are unchanged
+	if (deckCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Deck ok.\n");
+	}
+	if (discardCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Discard ok.\n");
+	}
+
+	// Opponents should be entirely unaffected
+	if (oppNoChange(&G, &testG) == 1) {
+		printf("Opponents ok.\n");
+	}
+
+	// Kingdom cards should be unaffected
+	if (kingdomNoChange(&G, &testG) == 1) {
+		printf("Kingdom piles ok.\n");
+	}
 
 
 
