@@ -505,7 +505,57 @@ int main() {
 	}
 
 
+	// ---- Test 8: Revealed Ambassador -----
+	printf("\n----- TEST 8: Attempting to return the played Ambassador -----\nDEBUG statements:\n");
 
+	// Set up game
+	initializeGame(numPlayers, k, seed, &G);
+	currentPlayer = whoseTurn(&G);
+	G.hand[currentPlayer][0] = ambassador;	// Set first card to ambassador
+	choice1 = 0;	// ambassador handPos
+	choice2 = 2;	// # of ambassadors to return
+	updateCoins(currentPlayer, &G, 0);	// Update coins incase copper was replaced
+	memcpy(&testG, &G, sizeof(struct gameState));
+
+	// Add ambassador to hand
+	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = ambassador;
+	handPos = testG.handCount[currentPlayer];
+	testG.handCount[currentPlayer]++;
+
+	// Play card
+	errTest = playCard(handPos, choice1, choice2, choice3, &testG);
+
+	printf("\n*~*~*~* Unit Tests *~*~*~*\n");
+	printf("Should be -1: %d\n", errTest);
+	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
+	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
+	printf("Expected coins: +0\t\tActual coins: +%d\n", testG.coins - G.coins);
+	printf("Expected handCount: 6\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
+	printf("Expected playedCardCount: 0\tActual playedCardCount: %d\n", testG.playedCardCount);
+
+	// Make sure hand is unaffected; Need to remove the added Ambassador to compare with original hand
+	testG.handCount[currentPlayer]--;
+	testG.hand[currentPlayer][testG.handCount[currentPlayer]] = -1;
+	if (handCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Hand ok.\n");
+	}
+	// Verify current player's deck and discard are unchanged
+	if (deckCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Deck ok.\n");
+	}
+	if (discardCheck(currentPlayer, &G, &testG) == 1) {
+		printf("Discard ok.\n");
+	}
+
+	// Opponents should be entirely unaffected
+	if (oppNoChange(&G, &testG) == 1) {
+		printf("Opponents ok.\n");
+	}
+
+	// Kingdom cards should be unaffected
+	if (kingdomNoChange(&G, &testG) == 1) {
+		printf("Kingdom piles ok.\n");
+	}
 
 
 }
