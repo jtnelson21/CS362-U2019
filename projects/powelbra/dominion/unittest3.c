@@ -356,7 +356,7 @@ int main() {
 
 
 	// ---- Test 6: Return 1 card when could've returned 2 -----
-	printf("\n----- TEST 6: eturn 1 card when could've returned 2 -----\nDEBUG statements:\n");
+	printf("\n----- TEST 6: Return 1 card when could've returned 2 -----\nDEBUG statements:\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -384,13 +384,10 @@ int main() {
 	printf("Expected playedCardCount: 1\tActual playedCardCount: %d\n", testG.playedCardCount);
 
 	// Make sure hand is otherwise unaffected
+	// Smithy at [0] was returned, so test [0]-[3] should match original [1] - [4]
 	handChck = 1;
-	if (G.hand[currentPlayer][0] != testG.hand[currentPlayer][0]) {
-		handChck = 0;
-		printf("Hand not ok at position 0.\n");
-	}
 	// Since handPos=1 was smithy and those cards shifted left, testG hand 1 == G hand 2
-	for (i = 1; i < testG.handCount[currentPlayer]; i++) {
+	for (i = 0; i < testG.handCount[currentPlayer]; i++) {
 		if (testG.hand[currentPlayer][i] != G.hand[currentPlayer][i + 1]) {
 			handChck = 0;
 			printf("Hand not ok at position %d.\n", i);
