@@ -197,15 +197,12 @@ int main() {
 		G.deck[0][i] = G.deck[1][i] = G.deck[2][i] = G.deck[3][i] = i;	// Curse and estate
 	}
 
+	memcpy(&testG, &G, sizeof(struct gameState));
 	for (i = 0; i < 4; i++) {
 		errTest[i] = shuffle(i, &testG);
 	}
 	
-	printf("Returned values should be 0: ");
-	for (i = 0; i < 4; i++) {
-		printf("%d\t", errTest[i]);
-	}
-	printf("\n");
+	printf("Returned values should be 0: %d\t%d\t%d\t%d\n", errTest[0], errTest[1], errTest[2], errTest[3]);
 
 	sentinel = 0;
 	
