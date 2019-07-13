@@ -4,7 +4,7 @@ Unit test for the Minion dominion card.
 
 Include in your makefile (cardEffect only if you have a separate file for card effects)
 unittest1: unittest2.c dominion.o rngs.o cardEffect.o testHelp.o
-	gcc -o unittest2 -g unittest1.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
+	gcc -o unittest2 -g unittest2.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
 */
 
 #include "dominion.h"
