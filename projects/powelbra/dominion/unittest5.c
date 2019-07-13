@@ -84,21 +84,21 @@ int main() {
 	printf("\n----- TEST 1: copper -> copper -----\nDEBUG statements:\n");
 	testMine(copper, copper, 0, 0, &G);
 	printf("\n----- TEST 2: copper -> silver -----\nDEBUG statements:\n");
-	testMine(copper, silver, 0, 1, &G);
+	testMine(copper, silver, 1, 0, &G);
 	printf("\n----- TEST 3: silver -> copper -----\nDEBUG statements:\n");
-	testMine(silver, copper, 0, -1, &G);
+	testMine(silver, copper, -1, 0, &G);
 	printf("\n----- TEST 4: silver -> silver -----\nDEBUG statements:\n");
 	testMine(silver, silver, 0, 0, &G);
 	printf("\n----- TEST 5: silver -> gold -----\nDEBUG statements:\n");
-	testMine(silver, gold, 0, 1, &G);
+	testMine(silver, gold, 1, 0, &G);
 	printf("\n----- TEST 6: gold -> copper -----\nDEBUG statements:\n");
-	testMine(gold, copper, 0, -2, &G);
+	testMine(gold, copper, -2, 0, &G);
 	printf("\n----- TEST 7: gold -> silver -----\nDEBUG statements:\n");
-	testMine(gold, silver, 0, -1, &G);
+	testMine(gold, silver, -1, 0, &G);
 	printf("\n----- TEST 8: gold -> gold -----\nDEBUG statements:\n");
 	testMine(gold, gold, 0, 0, &G);
 	printf("\n----- TEST 9: copper -> gold -----\nDEBUG statements:\n");
-	testMine(copper, gold, -1, 0, &G);
+	testMine(copper, gold, 0, -1, &G);
 
 
 
