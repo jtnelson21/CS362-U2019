@@ -13,14 +13,14 @@ int kingdomNoChange(struct gameState *G, struct gameState *test);
 // Checks opponents' hands, decks, and discards; current player must be 0.
 int oppNoChange(struct gameState *G, struct gameState *test);
 
-// Checks current player's hand
-int handNoChange(struct gameState *G, struct gameState *test);
+// Checks player's hand
+int handCheck(int player, struct gameState *G, struct gameState *test);
 
-// Checks current player's deck
-int deckNoChange(struct gameState *G, struct gameState *test);
+// Checks player's deck
+int deckCheck(int player, struct gameState *G, struct gameState *test);
 
-// Check current player's discard
-int discardNoChange(struct gameState *G, struct gameState *test);
+// Check player's discard
+int discardCheck(int player, struct gameState *G, struct gameState *test);
 
 
 #endif

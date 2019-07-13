@@ -64,21 +64,23 @@ int oppNoChange(struct gameState *G, struct gameState *testG) {
 	return x;
 }
 
+
+
+
 // Verify hand remains unchanged; Assumes played card was last in hand
 // Returns -1 on fail, 1 on success
-int handNoChange(struct gameState *G, struct gameState *testG) {
-	int currentPlayer = whoseTurn(G);
+int handCheck(int player, struct gameState *G, struct gameState *testG) {
 	int i;
 
-	if (G->handCount[currentPlayer] != testG->handCount[currentPlayer]) {
-		printf("handCount changed.\n");
+	if (G->handCount[player] != testG->handCount[player]) {
+		printf("Player %d's handCount changed.\n", player);
 		return -1;
 	}
 	else {
-		for (i = 0; i < G->handCount[currentPlayer]; i++) {
-			if (G->hand[currentPlayer][i] != testG->hand[currentPlayer][i]) {
-				printf("Card in hand at position %d changed.\n", i);
-				printf("Original: %d\t\tNew: %d\n", G->hand[currentPlayer][i], testG->hand[currentPlayer][i]);
+		for (i = 0; i < G->handCount[player]; i++) {
+			if (G->hand[player][i] != testG->hand[player][i]) {
+				printf("Player %d's card in hand at position %d changed.\n", player, i);
+				printf("Original: %d\t\tNew: %d\n", G->hand[player][i], testG->hand[player][i]);
 				return -1;
 			}
 		}
@@ -89,19 +91,18 @@ int handNoChange(struct gameState *G, struct gameState *testG) {
 
 // Verify deck remains unchanged;
 // Returns -1 on fail, 1 on success
-int deckNoChange(struct gameState *G, struct gameState *testG) {
-	int currentPlayer = whoseTurn(G);
+int deckCheck(int player, struct gameState *G, struct gameState *testG) {
 	int i;
 
-	if (G->deckCount[currentPlayer] != testG->deckCount[currentPlayer]) {
-		printf("deckCount changed.\n");
+	if (G->deckCount[player] != testG->deckCount[player]) {
+		printf("Player %d's deckCount changed.\n", player);
 		return -1;
 	}
 	else {
-		for (i = 0; i < G->deckCount[currentPlayer]; i++) {
-			if (G->deck[currentPlayer][i] != testG->deck[currentPlayer][i]) {
-				printf("Card in deck at position %d changed.\n", i);
-				printf("Original: %d\t\tNew: %d\n", G->deck[currentPlayer][i], testG->deck[currentPlayer][i]);
+		for (i = 0; i < G->deckCount[player]; i++) {
+			if (G->deck[player][i] != testG->deck[player][i]) {
+				printf("Player %d's card in deck at position %d changed.\n", player, i);
+				printf("Original: %d\t\tNew: %d\n", G->deck[player][i], testG->deck[player][i]);
 				return -1;
 			}
 		}
@@ -112,19 +113,18 @@ int deckNoChange(struct gameState *G, struct gameState *testG) {
 
 // Verify discard remains unchanged;
 // Returns -1 on fail, 1 on success
-int discardNoChange(struct gameState *G, struct gameState *testG) {
-	int currentPlayer = whoseTurn(G);
+int discardCheck(int player, struct gameState *G, struct gameState *testG) {
 	int i;
 
-	if (G->discardCount[currentPlayer] != testG->discardCount[currentPlayer]) {
-		printf("discardCount changed.\n");
+	if (G->discardCount[player] != testG->discardCount[player]) {
+		printf("Player %d's discardCount changed.\n", player);
 		return -1;
 	}
 	else {
-		for (i = 0; i < G->discardCount[currentPlayer]; i++) {
-			if (G->discard[currentPlayer][i] != testG->discard[currentPlayer][i]) {
-				printf("Card in discard at position %d changed.\n", i);
-				printf("Original: %d\t\tNew: %d\n", G->discard[currentPlayer][i], testG->discard[currentPlayer][i]);
+		for (i = 0; i < G->discardCount[player]; i++) {
+			if (G->discard[player][i] != testG->discard[player][i]) {
+				printf("Player %d's card in discard at position %d changed.\n", player, i);
+				printf("Original: %d\t\tNew: %d\n", G->discard[player][i], testG->discard[player][i]);
 				return -1;
 			}
 		}

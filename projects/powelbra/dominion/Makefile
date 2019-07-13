@@ -45,6 +45,15 @@ unittest1: unittest1.c dominion.o rngs.o cardEffect.o testHelp.o
 unittest2: unittest2.c dominion.o rngs.o cardEffect.o testHelp.o
 	gcc -o unittest2 -g unittest2.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
 
+unittest3: unittest3.c dominion.o rngs.o cardEffect.o testHelp.o
+	gcc -o unittest3 -g unittest3.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
+
+unittest4: unittest4.c dominion.o rngs.o cardEffect.o testHelp.o
+	gcc -o unittest4 -g unittest4.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
+
+unittest5: unittest5.c dominion.o rngs.o cardEffect.o testHelp.o
+	gcc -o unittest5 -g unittest5.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
+
 all: playdom player 
 
 clean:

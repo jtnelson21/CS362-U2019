@@ -1,6 +1,6 @@
 /*
 Author: Brad Powell
-Unit test for the Baron dominion card.
+Unit test for the Minion dominion card.
 
 Include in your makefile (cardEffect only if you have a separate file for card effects)
 unittest1: unittest2.c dominion.o rngs.o cardEffect.o testHelp.o
@@ -16,7 +16,7 @@ unittest1: unittest2.c dominion.o rngs.o cardEffect.o testHelp.o
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TESTCARD "minion"
+#define TESTCARD "Minion"
 
 int main() {
 	int i, currentPlayer;
@@ -53,16 +53,16 @@ int main() {
 	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: +2\t\tActual coins: +%d\n", testG.coins - G.coins);
 
-	if (handNoChange(&G, &testG) == 1) {
+	if (handCheck(currentPlayer, &G, &testG) == 1) {
 		printf("Hand ok.\n");
 	}
-	if (deckNoChange(&G, &testG) == 1) {
+	if (deckCheck(currentPlayer, &G, &testG) == 1) {
 		printf("Deck ok.\n");
 	}
-	if (discardNoChange(&G, &testG) == 1) {
+	if (discardCheck(currentPlayer, &G, &testG) == 1) {
 		printf("Discard ok.\n");
 	}
-	if (oppNoChange(&G, &testG) == 1) {
+	if (oppCheck(&G, &testG) == 1) {
 		printf("Opponents ok.\n");
 	}
 	if (kingdomNoChange(&G, &testG) == 1) {
@@ -136,7 +136,7 @@ int main() {
 
 	// Coins should equal coppers in hand
 	int copCount;
-	for (i = 0; i < testG.handCount; i++) {
+	for (i = 0; i < testG.handCount[currentPlayer]; i++) {
 		if (testG.hand[currentPlayer][i] == copper) {
 			copCount++;
 		}

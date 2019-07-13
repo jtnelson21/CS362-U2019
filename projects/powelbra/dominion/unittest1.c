@@ -16,7 +16,7 @@ unittest1: unittest1.c dominion.o rngs.o cardEffect.o testHelp.o
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TESTCARD "baron"
+#define TESTCARD "Baron"
 
 
 
@@ -118,10 +118,10 @@ int main() {
 	if (oppNoChange(&G, &testG) == -1) {
 		printf("An opponent's state changed!\n");
 	}
-	if (handNoChange(&G, &testG) == -1) {
+	if (handCheck(currentPlayer, &G, &testG) == -1) {
 		printf("The hand was changed!\n");
 	}
-	if (deckNoChange(&G, &testG) == -1) {
+	if (deckCheck(currentPlayer, &G, &testG) == -1) {
 		printf("The deck was changed!\n");
 	}
 	// Reset testG's estate supply to G so kingdomNoChange can be run to detect other changes
@@ -168,10 +168,10 @@ int main() {
 	if (oppNoChange(&G, &testG) == -1) {
 		printf("An opponent's state changed!\n");
 	}
-	if (handNoChange(&G, &testG) == -1) {
+	if (handCheck(currentPlayer, &G, &testG) == -1) {
 		printf("The hand was changed!\n");
 	}
-	if (deckNoChange(&G, &testG) == -1) {
+	if (deckCheck(currentPlayer, &G, &testG) == -1) {
 		printf("The deck was changed!\n");
 	}
 	// Reset testG's estate supply to G so kingdomNoChange can be run to detect other changes
