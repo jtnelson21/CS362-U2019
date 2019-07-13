@@ -3,7 +3,7 @@ Author: Brad Powell
 Unit test for the Mine dominion card.
 
 Include in your makefile (cardEffect only if you have a separate file for card effects)
-unittest1: unittest5.c dominion.o rngs.o cardEffect.o testHelp.o
+unittest5: unittest5.c dominion.o rngs.o cardEffect.o testHelp.o
 	gcc -o unittest5 -g unittest5.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
 */
 
@@ -75,7 +75,7 @@ void testMine(int trash, int target, int expect) {
 		printf("Expected actions: 0\t\tActual actions: %d\n", testG.numActions);
 		printf("Expected coin value: %d\t\tActual coins: %d\n", expect, testG.coins - G.coins);
 		printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[currentPlayer]);
-		printf("Expected played count: 1\t Actual played: %d\n", testG.playedCardCount);
+		printf("Expected played count: 1\tActual played: %d\n", testG.playedCardCount);
 
 		if (deckCheck(currentPlayer, &G, &testG) == 1) {
 			printf("Deck ok.\t");

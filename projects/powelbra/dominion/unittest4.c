@@ -3,7 +3,7 @@ Author: Brad Powell
 Unit test for the Tribute dominion card.
 
 Include in your makefile (cardEffect only if you have a separate file for card effects)
-unittest1: unittest4.c dominion.o rngs.o cardEffect.o testHelp.o
+unittest4: unittest4.c dominion.o rngs.o cardEffect.o testHelp.o
 	gcc -o unittest4 -g unittest4.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
 */
 

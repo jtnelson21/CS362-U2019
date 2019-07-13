@@ -3,7 +3,7 @@ Author: Brad Powell
 Unit test for the Ambassador dominion card.
 
 Include in your makefile (cardEffect only if you have a separate file for card effects)
-unittest1: unittest3.c dominion.o rngs.o cardEffect.o testHelp.o
+unittest3: unittest3.c dominion.o rngs.o cardEffect.o testHelp.o
 	gcc -o unittest3 -g unittest1.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
 */
 
