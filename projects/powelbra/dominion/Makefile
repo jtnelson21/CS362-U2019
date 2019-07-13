@@ -57,6 +57,9 @@ unittest5: unittest5.c dominion.o rngs.o cardEffect.o testHelp.o
 cardtest1: cardtest1.c dominion.o rngs.o cardEffect.o interface.o
 	gcc -o cardtest1 -g cardtest1.c dominion.o rngs.o cardEffect.o interface.o $(CFLAGS)
 
+cardtest2: cardtest2.c dominion.o rngs.o cardEffect.o interface.o
+	gcc -o cardtest2 -g cardtest2.c dominion.o rngs.o cardEffect.o interface.o $(CFLAGS)
+	
 all: playdom player 
 
 clean:

@@ -14,7 +14,7 @@ cardtest1: cardtest1.c dominion.o rngs.o cardEffect.o testHelp.o
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TESTFUNCTION "shuffle"
+#define TESTFUNCTION "Shuffle"
 
 int main() {
 	int i, j, sentinel;	// 4 players to work with most number of decks at once
