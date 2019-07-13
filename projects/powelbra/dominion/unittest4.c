@@ -276,6 +276,7 @@ int main() {
 	player = currentPlayer + 1;
 	G.discard[player][0] = baron;
 	G.discardCount[player] = 1;
+	G.deckCount[player] = 0;
 	memcpy(&testG, &G, sizeof(struct gameState));
 
 	// Add tribute to hand
