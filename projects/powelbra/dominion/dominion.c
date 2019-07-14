@@ -420,6 +420,8 @@ int scoreFor (int player, struct gameState *state) {
   int i;
   int score = 0;
   //score from hand
+  printf("~_~_~_~_ In scoreFor _~_~_~_~\n");
+  printf("Player %d running score %d\n", player, score);
   for (i = 0; i < state->handCount[player]; i++)
     {
       if (state->hand[player][i] == curse) { score = score - 1; };
@@ -429,7 +431,7 @@ int scoreFor (int player, struct gameState *state) {
       if (state->hand[player][i] == great_hall) { score = score + 1; };
       if (state->hand[player][i] == gardens) { score = score + ( fullDeckCount(player, 0, state) / 10 ); };
     }
-
+  printf("Player %d running score %d\n", player, score);
   //score from discard
   for (i = 0; i < state->discardCount[player]; i++)
     {
@@ -440,7 +442,7 @@ int scoreFor (int player, struct gameState *state) {
       if (state->discard[player][i] == great_hall) { score = score + 1; };
       if (state->discard[player][i] == gardens) { score = score + ( fullDeckCount(player, 0, state) / 10 ); };
     }
-
+  printf("Player %d running score %d\n", player, score);
   //score from deck
   for (i = 0; i < state->discardCount[player]; i++)
     {
@@ -451,7 +453,7 @@ int scoreFor (int player, struct gameState *state) {
       if (state->deck[player][i] == great_hall) { score = score + 1; };
       if (state->deck[player][i] == gardens) { score = score + ( fullDeckCount(player, 0, state) / 10 ); };
     }
-
+  printf("Player %d final score %d\n", player, score);
   return score;
 }
 
