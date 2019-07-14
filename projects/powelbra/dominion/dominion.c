@@ -422,8 +422,10 @@ int scoreFor (int player, struct gameState *state) {
   //score from hand
   printf("~_~_~_~_ In scoreFor _~_~_~_~\n");
   printf("Player %d running score %d\n", player, score);
+  printf("Hand\n");
   for (i = 0; i < state->handCount[player]; i++)
     {
+	  printf("Card POS %d is %d\n", i, state->hand[player][i]);
       if (state->hand[player][i] == curse) { score = score - 1; };
       if (state->hand[player][i] == estate) { score = score + 1; };
       if (state->hand[player][i] == duchy) { score = score + 3; };
@@ -433,8 +435,10 @@ int scoreFor (int player, struct gameState *state) {
     }
   printf("Player %d running score %d\n", player, score);
   //score from discard
+  printf("discard\n");
   for (i = 0; i < state->discardCount[player]; i++)
     {
+	  printf("Card POS %d is %d\n", i, state->hand[player][i]);
       if (state->discard[player][i] == curse) { score = score - 1; };
       if (state->discard[player][i] == estate) { score = score + 1; };
       if (state->discard[player][i] == duchy) { score = score + 3; };
@@ -444,8 +448,10 @@ int scoreFor (int player, struct gameState *state) {
     }
   printf("Player %d running score %d\n", player, score);
   //score from deck
+  printf("deck");
   for (i = 0; i < state->discardCount[player]; i++)
     {
+	  printf("Card POS %d is %d\n", i, state->hand[player][i]);
       if (state->deck[player][i] == curse) { score = score - 1; };
       if (state->deck[player][i] == estate) { score = score + 1; };
       if (state->deck[player][i] == duchy) { score = score + 3; };
