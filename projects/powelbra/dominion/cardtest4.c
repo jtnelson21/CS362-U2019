@@ -85,7 +85,7 @@ int main() {
 	
 
 
-	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
+	printf("---------- Testing Function: %s ----------\n", TESTFUNCTION);
 
 	// ---- Test 1		 -----
 	printf("\n----- TEST 1: 4 Players, 3-way tie -----\nDEBUG statements:\n");
@@ -93,7 +93,7 @@ int main() {
 	getWinners(players, &G);
 	printf("Player 2 is the current player, so players 3 and 4 should both win (value == 1).");
 	for (i = 0; i < G.numPlayers; i++) {
-		printf("Player %d: %d\n", i+1, )
+		printf("Player %d: %d\n", i + 1, players[i]);
 	}
 
 
