@@ -158,12 +158,12 @@ int main(int argc, char* argv[]) {
 			printHelp();
 		} else
 		if(COMPARE(command, init) == 0) {
-			int numHuman = arg0 - arg1;
-			for(playerNum = numHuman; playerNum < arg0; playerNum++) {
+			int numHuman = arg0;
+			for(playerNum = numHuman; playerNum < arg0+arg1; playerNum++) {
 				isBot[playerNum] = TRUE;
 			}			
 	//		selectKingdomCards(randomSeed, kCards);  //Comment this out to use the default card set defined in playDom.
-			outcome = initializeGame(arg0, kCards, randomSeed, game);
+			outcome = initializeGame(arg0+arg1, kCards, randomSeed, game);
 			printf("\n");
 			if(outcome == SUCCESS){
 				gameStarted = TRUE;
