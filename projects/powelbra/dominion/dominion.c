@@ -462,8 +462,7 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state) {
   int currentPlayer;
 
   //get score for each player
-  for (i = 0; i < MAX_PLAYERS; i++)
-    {
+  for (i = 0; i < MAX_PLAYERS; i++) {
       //set unused player scores to -9999
       if (i >= state->numPlayers)
 	{
@@ -473,7 +472,7 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state) {
 	{
 	  players[i] = scoreFor (i, state);
 	}
-    }
+  }
 
   //find highest score
   j = 0;
