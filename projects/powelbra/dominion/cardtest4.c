@@ -10,6 +10,7 @@ cardtest4: cardtest4.c dominion.o rngs.o cardEffect.o testHelp.o
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "rngs.h"
+#include "interface.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,6 +26,22 @@ int main() {
 
 	initializeGame(4, k, seed, &G);
 
+	
+	printf("---------- Testing Function: %s ----------\n", TESTFUNCTION);
+
+	// ---- Test 1: Basic ----
+	printf("\n----- TEST 1: Initial Game State -----\n");
+	printf("Game just initialized. All scores should be 3, so players 1-3 should win."\n);
+	printScores(&G);
+	for (i = 0; i < G.numPlayers; i++) {
+		printf("Player %d: %d\n", i + 1, players[i]);
+	}
+
+
+	
+
+	// ---- Test 2		 -----
+	printf("\n----- TEST 2: 4 Players, 3-way tie -----\n");
 	// Player 0: All cards in deck are estates, no cards elsewhere. Score = 10
 	G.handCount[0] = 0;
 	G.discardCount[0] = 0;
@@ -82,13 +99,11 @@ int main() {
 	}
 	G.hand[3][3] = G.hand[3][4] = G.deck[3][4] = duchy;
 	G.discard[3][2] = G.discard[3][9] = G.deck[3][2] = great_hall;
-	
 
 
-	printf("---------- Testing Function: %s ----------\n", TESTFUNCTION);
 
-	// ---- Test 1		 -----
-	printf("\n----- TEST 1: 4 Players, 3-way tie -----\nDEBUG statements:\n");
+
+
 	G.whoseTurn = 1;
 	getWinners(players, &G);
 	printf("Player 2 is the current player, so players 3 and 4 should both win (value == 1).");

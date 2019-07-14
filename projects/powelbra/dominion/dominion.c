@@ -470,7 +470,7 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state) {
 	}
       else
 	{
-	  players[i] = scoreFor (i, state);
+	  players[i] = scoreFor(i, state);
 	}
   }
 
