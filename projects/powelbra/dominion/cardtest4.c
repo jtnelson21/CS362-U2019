@@ -31,7 +31,7 @@ int main() {
 
 	// ---- Test 1: Basic ----
 	printf("\n----- TEST 1: Initial Game State -----\n");
-	printf("Game just initialized. All scores should be 3, so players 1-3 should win."\n);
+	printf("Game just initialized. All scores should be 3, so players 1-3 should win.\n");
 	printScores(&G);
 	for (i = 0; i < G.numPlayers; i++) {
 		printf("Player %d: %d\n", i + 1, players[i]);
