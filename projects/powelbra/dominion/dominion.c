@@ -420,46 +420,35 @@ int scoreFor (int player, struct gameState *state) {
   int i;
   int score = 0;
   //score from hand
-  printf("~_~_~_~_ In scoreFor _~_~_~_~\n");
-  printf("Player %d running score %d\n", player, score);
-  printf("Hand\n");
   for (i = 0; i < state->handCount[player]; i++)
     {
-	  printf("Card POS %d is %d\n", i, state->hand[player][i]);
       if (state->hand[player][i] == curse) { score = score - 1; };
       if (state->hand[player][i] == estate) { score = score + 1; };
       if (state->hand[player][i] == duchy) { score = score + 3; };
       if (state->hand[player][i] == province) { score = score + 6; };
       if (state->hand[player][i] == great_hall) { score = score + 1; };
-	  if (state->hand[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10 ); };
+	  if (state->hand[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10; }
     }
-  printf("Player %d running score %d\n", player, score);
   //score from discard
-  printf("discard\n");
   for (i = 0; i < state->discardCount[player]; i++)
     {
-	  printf("Card POS %d is %d\n", i, state->discard[player][i]);
       if (state->discard[player][i] == curse) { score = score - 1; };
       if (state->discard[player][i] == estate) { score = score + 1; };
       if (state->discard[player][i] == duchy) { score = score + 3; };
       if (state->discard[player][i] == province) { score = score + 6; };
       if (state->discard[player][i] == great_hall) { score = score + 1; };
-      if (state->discard[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10 ); };
+      if (state->discard[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10; }
     }
-  printf("Player %d running score %d\n", player, score);
   //score from deck
-  printf("deck\n");
   for (i = 0; i < state->deckCount[player]; i++)
     {
-	  printf("Card POS %d is %d\n", i, state->deck[player][i]);
       if (state->deck[player][i] == curse) { score = score - 1; };
       if (state->deck[player][i] == estate) { score = score + 1; };
       if (state->deck[player][i] == duchy) { score = score + 3; };
       if (state->deck[player][i] == province) { score = score + 6; };
       if (state->deck[player][i] == great_hall) { score = score + 1; };
-      if (state->deck[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10 ); };
+      if (state->deck[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10; }
     }
-  printf("Player %d final score %d\n", player, score);
   return score;
 }
 
