@@ -10,6 +10,7 @@ cardtest3: cardtest3.c dominion.o rngs.o cardEffect.o testHelp.o
 #include "dominion.h"
 #include "dominion_helpers.h"
 #include "rngs.h"
+#include "interface.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +22,7 @@ int main() {
 	int k[10] = { baron, minion, ambassador, tribute, mine, gardens, village, smithy, adventurer, great_hall };
 	int seed = 100;
 	struct gameState G, testG;
+	char cardName[MAX_STRING_LENGTH];
 
 	initializeGame(3, k, seed, &G);
 
@@ -40,26 +42,48 @@ int main() {
 
 	memcpy(&testG, &G, sizeof(struct gameState));
 
+	printf("Player 1\tPlayer 2\tPlayer 3\tHand\n");
+	for (i = 0; i < 5; i++) {
+		cardNumToName(testG.hand[0][i], cardName);
+		printf("%s\t", cardName);
+		cardNumToName(testG.hand[1][i], cardName);
+		printf("%s\t", cardName);
+		cardNumToName(testG.hand[2][i], cardName);
+		printf("%s\n", cardName);
+	}
+	printf("Player 1\tPlayer 2\tPlayer 3\tDeck\n");
+	for (i = 0; i < 5; i++) {
+		cardNumToName(testG.deck[0][i], cardName);
+		printf("%s\t", cardName);
+		cardNumToName(testG.deck[1][i], cardName);
+		printf("%s\t", cardName);
+		cardNumToName(testG.deck[2][i], cardName);
+		printf("%s\n", cardName);
+	}
+
+
+
+
 	errTest = endTurn(&testG);
 
 	printf("Returned value should be 0: %d\n", errTest);
 	printf("Previous player:\n");
-	printf("Expected discardCount: %d\t\tActual discardCount: %d\n", G.discardCount[0] + G.handCount[0] + G.playedCardCount, testG.discardCount[0]);
+	printf("Expected discardCount: %d\tActual discardCount: %d\n", G.discardCount[0] + G.handCount[0] + G.playedCardCount, testG.discardCount[0]);
 	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[0]);
 	printf("Expected deckCount: %d\t\tActual deckCount: %d\n", G.deckCount[0] - 5, testG.deckCount[0]);
 
 	printf("Current player:\n");
 	printf("Expected whoseTurn: 1\t\tActual whoseTurn: %d\n", whoseTurn(&testG));
-	printf("Expected discardCount: 0\t\tActual discardCount: %d\n", testG.discardCount[1]);
+	printf("Expected discardCount: 0\tActual discardCount: %d\n", testG.discardCount[1]);
 	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[1]);
 	printf("Expected deckCount: 5\t\tActual deckCount: %d\n", testG.deckCount[1]);
 	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: 5\t\tActual coins: %d\n", testG.coins);
-	printf("Expected playedCards: 0\tActual playedCards: %d\n", testG.playedCardCount);
+	printf("Expected playedCards: 0\t\tActual playedCards: %d\n", testG.playedCardCount);
 
 	// ----- Test 2: Played card
-	printf("\n----- TEST 2: Played cards moved to discard; Test player loop");
+	printf("\n----- TEST 2: Played cards moved to discard; Test player loop -----\n");
 	
 	// Reset testG
 	memcpy(&testG, &G, sizeof(struct gameState));
@@ -74,19 +98,19 @@ int main() {
 
 	printf("Returned value should be 0: %d\n", errTest);
 	printf("Previous player:\n");
-	printf("Expected discardCount: %d\t\tActual discardCount: %d\n", G.discardCount[2] + G.handCount[2] + G.playedCardCount, testG.discardCount[2]);
+	printf("Expected discardCount: %d\tActual discardCount: %d\n", G.discardCount[2] + G.handCount[2] + G.playedCardCount, testG.discardCount[2]);
 	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[2]);
 	printf("Expected deckCount: %d\t\tActual deckCount: %d\n", G.deckCount[2] - 5, testG.deckCount[2]);
 
 	printf("Current player:\n");
-	printf("Expected whoseTurn: 1\t\tActual whoseTurn: %d\n", whoseTurn(&testG));
-	printf("Expected discardCount: 0\t\tActual discardCount: %d\n", testG.discardCount[0]);
+	printf("Expected whoseTurn: 0\t\tActual whoseTurn: %d\n", whoseTurn(&testG));
+	printf("Expected discardCount: 0\tActual discardCount: %d\n", testG.discardCount[0]);
 	printf("Expected handCount: 5\t\tActual handCount: %d\n", testG.handCount[0]);
 	printf("Expected deckCount: 5\t\tActual deckCount: %d\n", testG.deckCount[0]);
 	printf("Expected buys: 1\t\tActual buys: %d\n", testG.numBuys);
 	printf("Expected actions: 1\t\tActual actions: %d\n", testG.numActions);
 	printf("Expected coins: 5\t\tActual coins: %d\n", testG.coins);
-	printf("Expected playedCards: 0\tActual playedCards: %d\n", testG.playedCardCount);
+	printf("Expected playedCards: 0\t\tActual playedCards: %d\n", testG.playedCardCount);
 	
 
 
