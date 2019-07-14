@@ -42,27 +42,6 @@ int main() {
 
 	memcpy(&testG, &G, sizeof(struct gameState));
 
-	printf("Player 1\tPlayer 2\tPlayer 3\tHand\n");
-	for (i = 0; i < 5; i++) {
-		cardNumToName(testG.hand[0][i], cardName);
-		printf("%s\t", cardName);
-		cardNumToName(testG.hand[1][i], cardName);
-		printf("%s\t", cardName);
-		cardNumToName(testG.hand[2][i], cardName);
-		printf("%s\n", cardName);
-	}
-	printf("Player 1\tPlayer 2\tPlayer 3\tDeck\n");
-	for (i = 0; i < 5; i++) {
-		cardNumToName(testG.deck[0][i], cardName);
-		printf("%s\t", cardName);
-		cardNumToName(testG.deck[1][i], cardName);
-		printf("%s\t", cardName);
-		cardNumToName(testG.deck[2][i], cardName);
-		printf("%s\n", cardName);
-	}
-
-
-
 
 	errTest = endTurn(&testG);
 
@@ -89,9 +68,9 @@ int main() {
 	memcpy(&testG, &G, sizeof(struct gameState));
 	testG.whoseTurn = 2;	// Set last player to current player
 	// Add cards to played area
-	testG.playedCardCount = 3;
+	testG.playedCardCount = G.playedCardCount = 3;
 	for (i = 0; i < testG.playedCardCount; i++) {
-		testG.playedCards[i] = i + 7;	// Adventurer, council_room, feast
+		testG.playedCards[i] = G.playedCards[i] = i + 7;	// Adventurer, council_room, feast
 	}
 
 	errTest = endTurn(&testG);
