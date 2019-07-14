@@ -448,10 +448,10 @@ int scoreFor (int player, struct gameState *state) {
     }
   printf("Player %d running score %d\n", player, score);
   //score from deck
-  printf("deck");
+  printf("deck\n");
   for (i = 0; i < state->deckCount[player]; i++)
     {
-	  printf("Card POS %d is %d\n", i, state->hand[player][i]);
+	  printf("Card POS %d is %d\n", i, state->deck[player][i]);
       if (state->deck[player][i] == curse) { score = score - 1; };
       if (state->deck[player][i] == estate) { score = score + 1; };
       if (state->deck[player][i] == duchy) { score = score + 3; };
