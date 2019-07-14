@@ -72,7 +72,7 @@ int main() {
 
 	// Test played area
 	printf("--- Testing if cards in played area stay put (they should!) ---\n");
-	printf("5 cards in deck, 3 in discard. 10 Draws.")
+	printf("5 cards in deck, 3 in discard. 10 Draws.");
 	initializeGame(numPlayers, k, seed, &G);
 	G.discardCount[0] = 3;
 	for (i = 0; i < G.discardCount[0]; i++) {
@@ -120,7 +120,7 @@ int main() {
 		sentinel = 0;
 	}
 	else {
-		for (i = 0; i < 5, i++) {
+		for (i = 0; i < 5; i++) {
 			if (G.playedCards[i] != baron) {
 				printf("Played card at %d changed to %d.\n", i, G.playedCards[i]);
 				sentinel = 0;
