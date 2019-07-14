@@ -40,7 +40,7 @@ int main() {
 
 	for (i = 0; i < 30; i++) {
 		printf("Draw %d\n", i + 1);
-		topCard = G.deck[0][G.deckCount[0]];	// Set topCard to top card of the deck
+		topCard = G.deck[0][G.deckCount[0] - 1];	// Set topCard to top card of the deck
 		prevHandC = G.handCount[0];	// Store handcount
 		prevDeckC = G.deckCount[0];	// Store deckcount
 		errTest = drawCard(0, &G);
@@ -49,7 +49,7 @@ int main() {
 			printf("Shuffling...\n");
 		}
 		else {
-			if (G.hand[0][G.handCount[0]] != topCard) {
+			if (G.hand[0][G.handCount[0] - 1] != topCard) {
 				printf("Drawn card is different from what was the top card.\n");
 			}
 			if (G.handCount[0] != prevHandC + 1) {
