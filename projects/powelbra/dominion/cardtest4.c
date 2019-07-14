@@ -63,7 +63,7 @@ int main() {
 	// ----- Test 4: Winner 3 -----
 	printf("\n----- TEST 4: Player 3 wins -----\n");
 	G.discard[3][0] = G.discard[3][1] = province;
-	G.discardCount[0] = 2;
+	G.discardCount[3] = 2;
 	printScores(&G);
 	getWinners(players, &G);
 	for (i = 0; i < G.numPlayers; i++) {
@@ -71,7 +71,7 @@ int main() {
 	}
 
 	// ---- Test 5: Ties ----
-	printf("\n----- TEST 1: Initial Game State; All scores equal -----\n");
+	printf("\n----- TEST 5: Initial Game State; All scores equal -----\n");
 	printf("Game just initialized. All scores should be 3, so players 1-3 should win.\n");
 	printScores(&G);
 	getWinners(players, &G);
@@ -80,7 +80,7 @@ int main() {
 	}
 
 	// ---- Test 6		 -----
-	printf("\n----- TEST 2: 4 Players, 3-way tie; Varied victory cards -----\n");
+	printf("\n----- TEST 6: 4 Players, 3-way tie; Varied victory cards -----\n");
 	// Player 0: All cards in deck are estates, no cards elsewhere. Score = 10
 	G.handCount[0] = 0;
 	G.discardCount[0] = 0;
