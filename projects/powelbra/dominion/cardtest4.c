@@ -160,5 +160,23 @@ int main() {
 		printf("Player %d: %d\n", i, players[i]);
 	}
 
+	// ----- Test 8: 3 players
+	printf("\n----- TEST 8: 3 Players -----\n");
+	initializeGame(3, k, seed, &G);
+	printScores(&G);
+	getWinners(players, &G);
+	for (i = 0; i < G.numPlayers; i++) {
+		printf("Player %d: %d\n", i, players[i]);
+	}
+
+	// ----- Test 9: 2 players
+	printf("\n----- TEST 9: 2 Players -----\n");
+	initializeGame(2, k, seed, &G);
+	printScores(&G);
+	getWinners(players, &G);
+	for (i = 0; i < G.numPlayers; i++) {
+		printf("Player %d: %d\n", i, players[i]);
+	}
+
 	return 0;
 }
