@@ -438,7 +438,7 @@ int scoreFor (int player, struct gameState *state) {
   printf("discard\n");
   for (i = 0; i < state->discardCount[player]; i++)
     {
-	  printf("Card POS %d is %d\n", i, state->hand[player][i]);
+	  printf("Card POS %d is %d\n", i, state->discard[player][i]);
       if (state->discard[player][i] == curse) { score = score - 1; };
       if (state->discard[player][i] == estate) { score = score + 1; };
       if (state->discard[player][i] == duchy) { score = score + 3; };
