@@ -50,7 +50,7 @@ int main() {
 		G.deck[0][i] = estate;
 	}
 
-	// Player 1: Duchy in discard, province in hand, estate in deck, otherwise coppers. Score = 12
+	// Player 1: Duchy in discard, province in hand, estate in deck, otherwise coppers. Score = 10
 	G.handCount[1] = 7;
 	G.discardCount[1] = 4;
 	G.deckCount[1] = 20;
