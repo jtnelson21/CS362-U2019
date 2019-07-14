@@ -29,7 +29,48 @@ int main() {
 	
 	printf("---------- Testing Function: %s ----------\n", TESTFUNCTION);
 
-	// ---- Test 1: Basic ----
+
+	// ----- Test 1: Winner 0 -----
+	printf("\n----- TEST 1: Player 0 wins -----\n");
+	G.discard[0][0] = estate;
+	G.discardCount[0] = 1;
+	printScores(&G);
+	getWinners(players, &G);
+	for (i = 0; i < G.numPlayers; i++) {
+		printf("Player %d: %d\n", i, players[i]);
+	}
+
+	// ----- Test 2: Winner 1 -----
+	printf("\n----- TEST 2: Player 1 wins -----\n");
+	G.discard[1][0] = duchy;
+	G.discardCount[1] = 1;
+	printScores(&G);
+	getWinners(players, &G);
+	for (i = 0; i < G.numPlayers; i++) {
+		printf("Player %d: %d\n", i, players[i]);
+	}
+
+	// ----- Test 3: Winner 2 -----
+	printf("\n----- TEST 3: Player 2 wins -----\n");
+	G.discard[2][0] = province;
+	G.discardCount[2] = 1;
+	printScores(&G);
+	getWinners(players, &G);
+	for (i = 0; i < G.numPlayers; i++) {
+		printf("Player %d: %d\n", i, players[i]);
+	}
+
+	// ----- Test 4: Winner 3 -----
+	printf("\n----- TEST 4: Player 3 wins -----\n");
+	G.discard[3][0] = G.discard[3][1] = province;
+	G.discardCount[0] = 2;
+	printScores(&G);
+	getWinners(players, &G);
+	for (i = 0; i < G.numPlayers; i++) {
+		printf("Player %d: %d\n", i, players[i]);
+	}
+
+	// ---- Test 5: Ties ----
 	printf("\n----- TEST 1: Initial Game State; All scores equal -----\n");
 	printf("Game just initialized. All scores should be 3, so players 1-3 should win.\n");
 	printScores(&G);
@@ -38,8 +79,7 @@ int main() {
 		printf("Player %d: %d\n", i, players[i]);
 	}
 
-
-	// ---- Test 2		 -----
+	// ---- Test 6		 -----
 	printf("\n----- TEST 2: 4 Players, 3-way tie; Varied victory cards -----\n");
 	// Player 0: All cards in deck are estates, no cards elsewhere. Score = 10
 	G.handCount[0] = 0;
@@ -49,7 +89,7 @@ int main() {
 		G.deck[0][i] = estate;
 	}
 
-	// Player 1: Duchy in discard, province in hand, estate in deck, otherwise coppers. Score = 10
+	// Player 1: Duchy in discard, province in hand, estate and 2 great halls in deck, otherwise coppers. Score = 12
 	G.handCount[1] = 7;
 	G.discardCount[1] = 4;
 	G.deckCount[1] = 20;
@@ -65,6 +105,7 @@ int main() {
 	G.hand[1][4] = province;
 	G.discard[1][2] = duchy;
 	G.deck[1][15] = estate;
+	G.deck[1][0] = G.deck[1][3] = great_hall;
 
 	// Player 2: 30 cards total, 4 gardens. Score = 12
 	G.handCount[2] = 5;
@@ -108,7 +149,15 @@ int main() {
 		printf("Player %d: %d\n", i + 1, players[i]);
 	}
 
-
+	// ----- Test 7: tied, same number of turns
+	printf("\n----- TEST 7: Total 4-way tie -----\n");
+	initializeGame(4, k, seed, &G);
+	G.whoseTurn = 3;
+	printScores(&G);
+	getWinners(players, &G);
+	for (i = 0; i < G.numPlayers; i++) {
+		printf("Player %d: %d\n", i, players[i]);
+	}
 
 	return 0;
 }
