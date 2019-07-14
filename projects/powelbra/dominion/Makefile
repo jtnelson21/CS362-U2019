@@ -69,7 +69,7 @@ cardtest4: cardtest4.c dominion.o rngs.o cardEffect.o interface.o
 cardtest5: cardtest5.c dominion.o rngs.o cardEffect.o
 	gcc -o cardtest5 -g cardtest5.c dominion.o rngs.o cardEffect.o $(CFLAGS)
 	
-unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c cardtest5.c dominion.o rngs.o cardEffect.o interface.o
+unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c cardtest1.c cardtest2.c cardtest3.c cardtest4.c cardtest5.c dominion.o rngs.o cardEffect.o interface.o testHelp.o
 	echo "Running unit and card tests" > unittestresults.out
 	echo "unittest1.c:" >> unittestresults.out
 	gcc -o unittest1 -g unittest1.c dominion.o rngs.o cardEffect.o testHelp.o $(CFLAGS)
