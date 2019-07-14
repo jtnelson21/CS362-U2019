@@ -30,18 +30,17 @@ int main() {
 	printf("---------- Testing Function: %s ----------\n", TESTFUNCTION);
 
 	// ---- Test 1: Basic ----
-	printf("\n----- TEST 1: Initial Game State -----\n");
+	printf("\n----- TEST 1: Initial Game State; All scores equal -----\n");
 	printf("Game just initialized. All scores should be 3, so players 1-3 should win.\n");
 	printScores(&G);
+	getWinners(players, &G);
 	for (i = 0; i < G.numPlayers; i++) {
 		printf("Player %d: %d\n", i, players[i]);
 	}
 
 
-	
-
 	// ---- Test 2		 -----
-	printf("\n----- TEST 2: 4 Players, 3-way tie -----\n");
+	printf("\n----- TEST 2: 4 Players, 3-way tie; Varied victory cards -----\n");
 	// Player 0: All cards in deck are estates, no cards elsewhere. Score = 10
 	G.handCount[0] = 0;
 	G.discardCount[0] = 0;
@@ -101,12 +100,10 @@ int main() {
 	G.discard[3][2] = G.discard[3][9] = G.deck[3][2] = great_hall;
 
 
-
-
-
 	G.whoseTurn = 1;
 	getWinners(players, &G);
 	printf("Player 2 is the current player, so players 3 and 4 should both win (value == 1).");
+	printScores(&G);
 	for (i = 0; i < G.numPlayers; i++) {
 		printf("Player %d: %d\n", i + 1, players[i]);
 	}
