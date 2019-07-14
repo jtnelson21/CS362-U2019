@@ -111,7 +111,10 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c unittest5.c car
 	gcc -o cardtest5 -g cardtest5.c dominion.o rngs.o cardEffect.o $(CFLAGS)
 	./cardtest5 >> unittestresults.out
 	gcov -b -c cardtest5.c >> unittestresults.out
-
+	echo "\nCoverage of card functions:" >> unittestresults.out
+	gcov -b -c cardEffect.c >> unittestresults.out
+	echo "\nCoverage of dominion.c code:" >> unittestresults.out
+	gcov -b -c dominion.c >> unittestresults.out
 
 
 all: playdom player 
