@@ -31,7 +31,7 @@ int main() {
 	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
 
 	// ---- Test 1: +2 coins -----
-	printf("\n----- TEST 1: Choice1 = 1; +2 coins -----\nDEBUG statements:\n");
+	printf("\n----- TEST 1: Choice1 = 1; +2 coins -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -72,7 +72,7 @@ int main() {
 
 
 	// ---- Test 2: Redraw -----
-	printf("\n----- TEST 2: Choice2 = 1; Redraw; attack-----\nDEBUG statements:\n");
+	printf("\n----- TEST 2: Choice2 = 1; Redraw; attack-----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -224,5 +224,6 @@ int main() {
 		printf("Opponent %d has wrong deckCount of %d, should be 6.\n", player, testG.deckCount[player]);
 	}
 
+	printf("\n");
 	return 0;
 }

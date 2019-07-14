@@ -31,7 +31,7 @@ int main() {
 	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
 
 	// ---- Test 1: Reveal and return 1 card -----
-	printf("\n----- TEST 1: Reveal and return 1 card -----\nDEBUG statements:\n");
+	printf("\n----- TEST 1: Reveal and return 1 card -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -110,7 +110,7 @@ int main() {
 
 
 	// ---- Test 2: Reveal and return 2 cards -----
-	printf("\n----- TEST 2: Reveal and return 2 cards -----\nDEBUG statements:\n");
+	printf("\n----- TEST 2: Reveal and return 2 cards -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -185,7 +185,7 @@ int main() {
 
 
 	// ---- Test 3: Reveal and return 0 cards -----
-	printf("\n----- TEST 3: Reveal and return 0 cards -----\nDEBUG statements:\n");
+	printf("\n----- TEST 3: Reveal and return 0 cards -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -250,7 +250,7 @@ int main() {
 
 
 	// ---- Test 4: Return when there isn't one -----
-	printf("\n----- TEST 4: Attempt to return more cards than in hand -----\nDEBUG statements:\n");
+	printf("\n----- TEST 4: Attempt to return more cards than in hand -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -303,7 +303,7 @@ int main() {
 
 
 	// ---- Test 5: Attempt to return more cards -----
-	printf("\n----- TEST 5: Attempt to return more than 2 cards -----\nDEBUG statements:\n");
+	printf("\n----- TEST 5: Attempt to return more than 2 cards -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -356,7 +356,7 @@ int main() {
 
 
 	// ---- Test 6: Return 1 card when could've returned 2 -----
-	printf("\n----- TEST 6: Return 1 card when could've returned 2 -----\nDEBUG statements:\n");
+	printf("\n----- TEST 6: Return 1 card when could've returned 2 -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -432,7 +432,7 @@ int main() {
 
 
 	// ---- Test 7: Reveal and return 2 cards, but have 3 -----
-	printf("\n----- TEST 7: Reveal and return 2 cards (reprise) -----\nDEBUG statements:\n");
+	printf("\n----- TEST 7: Reveal and return 2 cards (reprise) -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -506,7 +506,7 @@ int main() {
 
 
 	// ---- Test 8: Revealed Ambassador -----
-	printf("\n----- TEST 8: Attempting to return the played Ambassador -----\nDEBUG statements:\n");
+	printf("\n----- TEST 8: Attempting to return the played Ambassador -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -559,7 +559,7 @@ int main() {
 
 
 	// ---- Test 9: Empty Supply -----
-	printf("\n----- TEST 9: Supply runs out before all opponents are served-----\nDEBUG statements:\n");
+	printf("\n----- TEST 9: Supply runs out before all opponents are served-----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -648,5 +648,6 @@ int main() {
 		printf("Kingdom piles ok.\n");
 	}
 
+	printf("\n");
 	return 0;
 }

@@ -31,7 +31,7 @@ int main() {
 	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
 
 	// ---- Test 1: 2 action cards -----
-	printf("\n----- TEST 1: 2 action cards; 2 cards in enemy deck -----\nDEBUG statements:\n");
+	printf("\n----- TEST 1: 2 action cards; 2 cards in enemy deck -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -92,7 +92,7 @@ int main() {
 
 
 	// ---- Test 2: 2 treasure cards -----
-	printf("\n----- TEST 2: 2 treasure cards; 1 card in enemy deck, 1 in discard -----\nDEBUG statements:\n");
+	printf("\n----- TEST 2: 2 treasure cards; 1 card in enemy deck, 1 in discard -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -137,7 +137,7 @@ int main() {
 
 
 	// ---- Test 3: 2 victory cards -----
-	printf("\n----- TEST 3: 2 victory cards; 0 card in enemy deck, 2 in discard -----\nDEBUG statements:\n");
+	printf("\n----- TEST 3: 2 victory cards; 0 card in enemy deck, 2 in discard -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -182,7 +182,7 @@ int main() {
 
 
 	// ---- Test 4: Duplicatecards -----
-	printf("\n----- TEST 4: Duplicate cards -----\nDEBUG statements:\n");
+	printf("\n----- TEST 4: Duplicate cards -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -225,7 +225,7 @@ int main() {
 
 
 	// ---- Test 5: 1 card in deck -----
-	printf("\n----- TEST 5: Only 1 card in deck -----\nDEBUG statements:\n");
+	printf("\n----- TEST 5: Only 1 card in deck -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -268,7 +268,7 @@ int main() {
 
 
 	// ---- Test 6: 1 card in discard-----
-	printf("\n----- TEST 6: Only 1 card in discard -----\nDEBUG statements:\n");
+	printf("\n----- TEST 6: Only 1 card in discard -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -313,7 +313,7 @@ int main() {
 
 
 	// ---- Test 7: no cards -----
-	printf("\n----- TEST 7: No cards -----\nDEBUG statements:\n");
+	printf("\n----- TEST 7: No cards -----\n");
 
 	// Set up game
 	initializeGame(numPlayers, k, seed, &G);
@@ -354,5 +354,6 @@ int main() {
 	printf("Next player expected dicardCount: 0\tActual discardCount: %d\n", testG.discardCount[player]);
 	printf("Next player expected deckCount: 0\tActual deckCount: %d\n", testG.deckCount[player]);
 
+	printf("\n");
 	return 0;
 }

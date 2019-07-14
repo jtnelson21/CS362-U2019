@@ -146,6 +146,6 @@ int main() {
 		printf("Whose turn should be 0: %d\n", whoseTurn(&G[numPlayers - 1]));
 	}
 	
-
+	printf("\n");
 	return 0;
 }

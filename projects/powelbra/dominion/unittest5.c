@@ -103,28 +103,27 @@ int main() {
 	printf("--------------- Testing Card: %s ---------------\n", TESTCARD);
 
 	// Run tests
-	printf("\n----- TEST 1: copper -> copper -----\nDEBUG statements:\n");
+	printf("\n----- TEST 1: copper -> copper -----\n");
 	testMine(copper, copper, 0);
-	printf("\n----- TEST 2: copper -> silver -----\nDEBUG statements:\n");
+	printf("\n----- TEST 2: copper -> silver -----\n");
 	testMine(copper, silver, 1);
-	printf("\n----- TEST 3: copper -> gold -----\nDEBUG statements:\n");
+	printf("\n----- TEST 3: copper -> gold -----\n");
 	testMine(copper, gold, 0);
-	printf("\n----- TEST 4: silver -> copper -----\nDEBUG statements:\n");
+	printf("\n----- TEST 4: silver -> copper -----\n");
 	testMine(silver, copper, -1);
-	printf("\n----- TEST 5: silver -> silver -----\nDEBUG statements:\n");
+	printf("\n----- TEST 5: silver -> silver -----\n");
 	testMine(silver, silver, 0);
-	printf("\n----- TEST 6: silver -> gold -----\nDEBUG statements:\n");
+	printf("\n----- TEST 6: silver -> gold -----\n");
 	testMine(silver, gold, 1);
-	printf("\n----- TEST 7: gold -> copper -----\nDEBUG statements:\n");
+	printf("\n----- TEST 7: gold -> copper -----\n");
 	testMine(gold, copper, -2);
-	printf("\n----- TEST 8: gold -> silver -----\nDEBUG statements:\n");
+	printf("\n----- TEST 8: gold -> silver -----\n");
 	testMine(gold, silver, -1);
-	printf("\n----- TEST 9: gold -> gold -----\nDEBUG statements:\n");
+	printf("\n----- TEST 9: gold -> gold -----\n");
 	testMine(gold, gold, 0);
 
 
 
-
+	printf("\n");
 	return 0;
-
 }

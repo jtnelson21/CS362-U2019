@@ -137,5 +137,6 @@ int main() {
 		printf("Played card area unaffected!\n");
 	}
 
+	printf("\n");
 	return 0;
 }

@@ -178,5 +178,6 @@ int main() {
 		printf("Player %d: %d\n", i, players[i]);
 	}
 
+	printf("\n");
 	return 0;
 }

@@ -221,5 +221,6 @@ int main() {
 		printf("All decks are the same.\n");
 	}
 
+	printf("\n");
 	return 0;
 }
