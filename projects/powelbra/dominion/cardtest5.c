@@ -35,7 +35,7 @@ int main() {
 	}
 	G.discardCount[0] = 10;
 	for (i = 0; i < G.discardCount[0]; i++) {
-		G.discard[0][i] = i + 15	// Baron, great hall... salvager
+		G.discard[0][i] = i + 15;	// Baron, great hall... salvager
 	}
 
 	for (i = 0; i < 30; i++) {
@@ -46,7 +46,7 @@ int main() {
 		errTest = drawCard(0, &G);
 		printf("Returned value: %d\n", errTest);
 		if (prevDeckC == 0) {
-			printf("Shuffling...\n")
+			printf("Shuffling...\n");
 		}
 		else {
 			if (G.hand[0][G.handCount[0]] != topCard) {
