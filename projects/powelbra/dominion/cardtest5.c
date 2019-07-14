@@ -45,6 +45,9 @@ int main() {
 		prevDeckC = G.deckCount[0];	// Store deckcount
 		if (prevDeckC == 0) {	// Store discard count when shuffling
 			shuffleCheck = G.discardCount[0];
+			if (G.discardCount[0] == 0) {
+				shuffleCheck = 1;	// Silence error message when no more cards to draw
+			}
 		}
 		errTest = drawCard(0, &G);
 		printf("Draw %d return: %d\n", i + 1, errTest);
@@ -71,7 +74,7 @@ int main() {
 	}
 
 	// Test played area
-	printf("--- Testing if cards in played area stay put (they should!) ---\n");
+	printf("\n--- Testing if cards in played area stay put (they should!) ---\n");
 	printf("5 cards in deck, 3 in discard. 10 Draws.");
 	initializeGame(numPlayers, k, seed, &G);
 	G.discardCount[0] = 3;
