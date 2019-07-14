@@ -72,6 +72,7 @@ int main() {
 
 	// ---- Test 5: Ties ----
 	printf("\n----- TEST 5: Initial Game State; All scores equal -----\n");
+	initializeGame(4, k, seed, &G);
 	printf("Game just initialized. All scores should be 3, so players 1-3 should win.\n");
 	printScores(&G);
 	getWinners(players, &G);
