@@ -427,9 +427,8 @@ int scoreFor (int player, struct gameState *state) {
       if (state->hand[player][i] == duchy) { score = score + 3; };
       if (state->hand[player][i] == province) { score = score + 6; };
       if (state->hand[player][i] == great_hall) { score = score + 1; };
-      if (state->hand[player][i] == gardens) { score = score + ( fullDeckCount(player, 0, state) / 10 ); };
+	  if (state->hand[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10; }
     }
-
   //score from discard
   for (i = 0; i < state->discardCount[player]; i++)
     {
@@ -438,20 +437,18 @@ int scoreFor (int player, struct gameState *state) {
       if (state->discard[player][i] == duchy) { score = score + 3; };
       if (state->discard[player][i] == province) { score = score + 6; };
       if (state->discard[player][i] == great_hall) { score = score + 1; };
-      if (state->discard[player][i] == gardens) { score = score + ( fullDeckCount(player, 0, state) / 10 ); };
+      if (state->discard[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10; }
     }
-
   //score from deck
-  for (i = 0; i < state->discardCount[player]; i++)
+  for (i = 0; i < state->deckCount[player]; i++)
     {
       if (state->deck[player][i] == curse) { score = score - 1; };
       if (state->deck[player][i] == estate) { score = score + 1; };
       if (state->deck[player][i] == duchy) { score = score + 3; };
       if (state->deck[player][i] == province) { score = score + 6; };
       if (state->deck[player][i] == great_hall) { score = score + 1; };
-      if (state->deck[player][i] == gardens) { score = score + ( fullDeckCount(player, 0, state) / 10 ); };
+      if (state->deck[player][i] == gardens) { score = score + (state->handCount[player] + state->discardCount[player] + state->deckCount[player]) / 10; }
     }
-
   return score;
 }
 
@@ -462,8 +459,7 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state) {
   int currentPlayer;
 
   //get score for each player
-  for (i = 0; i < MAX_PLAYERS; i++)
-    {
+  for (i = 0; i < MAX_PLAYERS; i++) {
       //set unused player scores to -9999
       if (i >= state->numPlayers)
 	{
@@ -471,9 +467,9 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state) {
 	}
       else
 	{
-	  players[i] = scoreFor (i, state);
+	  players[i] = scoreFor(i, state);
 	}
-    }
+  }
 
   //find highest score
   j = 0;
