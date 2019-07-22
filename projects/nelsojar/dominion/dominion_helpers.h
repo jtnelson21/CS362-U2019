@@ -13,4 +13,5 @@ int cardEffect(int card, int choice1, int choice2, int choice3,
 	struct gameState* state, int handPos, int* bonus);
 int estateGainCheck(struct gameState* state, int currentPlayer);
 int nPlayerDiscardToDeck(struct gameState* state, int nextPlayer, int i);
+int myAssert(int a, int b);
 #endif

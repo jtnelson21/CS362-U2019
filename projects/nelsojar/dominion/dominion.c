@@ -5,6 +5,7 @@
 #include <math.h>
 #include <stdlib.h>
 
+
 int compare(const void* a, const void* b) {
 	if (*(int*)a > * (int*)b)
 		return 1;
@@ -12,6 +13,21 @@ int compare(const void* a, const void* b) {
 		return -1;
 	return 0;
 }
+
+int myAssert(int a, int b)
+{
+	if (a > b || a < b)
+	{
+		printf("\tFailed\n\n");
+		return -1;
+	}
+	else
+	{
+		printf("\tPassed\n\n");
+		return 0;
+	}
+}
+
 
 struct gameState* newGame() {
 	struct gameState* g = malloc(sizeof(struct gameState));
@@ -34,8 +50,7 @@ int* kingdomCards(int k1, int k2, int k3, int k4, int k5, int k6, int k7,
 	return k;
 }
 
-int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
-	struct gameState* state) {
+int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed, struct gameState* state) {
 
 	int i;
 	int j;
@@ -862,7 +877,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 		return 0;
 
 	case tribute:
-		tribute_play(state, tributeRevealedCards, nextPlayer, currentPlayer);
+		tribute_play(state, tributeRevealedCards, currentPlayer, nextPlayer);
 
 	case ambassador:
 		ambassador_play(choice1, choice2, handPos, state, currentPlayer);
@@ -1102,6 +1117,7 @@ int ambassador_play(int choice1, int choice2, int handPos, struct gameState* sta
 
 	if (choice1 == handPos)
 	{
+		//return -1;
 		return -1;
 	}
 
@@ -1223,6 +1239,8 @@ int estateGainCheck(struct gameState* state, int currentPlayer)
 	{
 		isGameOver(state);
 	}
+
+	return 0;
 }
 
 int mine_play(struct gameState* state, int choice1, int choice2, int currentPlayer, int handPos)
@@ -1317,7 +1335,7 @@ int minion_play(struct gameState* state, int choice1, int choice2, int currentPl
 	return 0;
 }
 
-int tribute_play(struct gameState* state, int tributeRevealedCards[], int nextPlayer, int currentPlayer)
+int tribute_play(struct gameState* state, int tributeRevealedCards[], int currentPlayer, int nextPlayer)
 {
 	int i;
 
@@ -1394,4 +1412,5 @@ int nPlayerDiscardToDeck(struct gameState* state, int nextPlayer, int i)
 	state->deckCount[nextPlayer]++;
 	state->discard[nextPlayer][i] = -1;
 	state->discardCount[nextPlayer]--;
+	return 0;
 }
