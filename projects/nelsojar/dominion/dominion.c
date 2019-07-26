@@ -823,6 +823,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 	case baron:
 		baron_play(state, choice1, currentPlayer);
+		return 0;
 
 	case great_hall:
 		//+1 Card
