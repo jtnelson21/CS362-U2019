@@ -773,6 +773,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 	case mine:
 		mine_play(state, choice1, choice2, currentPlayer, handPos);
+		return 0;
 
 	case remodel:
 		j = state->hand[currentPlayer][choice1];  //store card we will trash
@@ -838,6 +839,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 	case minion:
 		minion_play(state, choice1, choice2, currentPlayer, handPos);
+		return 0;
 
 	case steward:
 		if (choice1 == 1)
@@ -864,9 +866,11 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 	case tribute:
 		tribute_play(state, tributeRevealedCards, nextPlayer, currentPlayer);
+		return 0;
 
 	case ambassador:
 		ambassador_play(choice1, choice2, handPos, state, currentPlayer);
+		return 0;
 
 	case cutpurse:
 
