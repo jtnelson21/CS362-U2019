@@ -82,8 +82,7 @@ struct gameState* newGame();
 int* kingdomCards(int k1, int k2, int k3, int k4, int k5, int k6, int k7,
 	int k8, int k9, int k10);
 
-int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
-	struct gameState* state);
+int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed, struct gameState* state);
 /* Responsible for initializing all supplies, and shuffling deck and
    drawing starting hands for all players.  Check that 10 cards selected
    are in fact (different) kingdom cards, and that numPlayers is valid.
@@ -141,7 +140,7 @@ int mine_play(struct gameState* state, int choice1, int choice2, int currentPlay
 int minion_play(struct gameState* state, int choice1, int choice2, int currentPlayer, int handPos);
 /*The minion card's function in cardEffect*/
 
-int tribute_play(struct gameState* state, int tributeRevealedCards[], int nextPlayer, int currentPlayer);
+int tribute_play(struct gameState* state, int tributeRevealedCards[], int currentPlayer, int nextPlayer);
 /*The tribute card's function in cardEffect*/
 
 #endif
